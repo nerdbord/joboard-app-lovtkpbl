@@ -24,6 +24,7 @@ const Checkbox = (props: CheckboxProps) => {
    };
    return (
       <div className={styles.checkboxTopWrap} onClick={handleCheck}>
+         <input type="checkbox" hidden={true} onChange={() => {}} />
          <div className={rectangleStyle}>{checked && <Checkmark />}</div>
          <div className={textStyle}>{props.text}</div>
       </div>
