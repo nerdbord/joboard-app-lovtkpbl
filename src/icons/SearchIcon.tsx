@@ -1,8 +1,11 @@
-interface SearchIconProps {}
+interface SearchIconProps {
+   className: string;
+}
 
 const SearchIcon = (props: SearchIconProps) => {
    return (
       <svg
+         className={props.className}
          width="30"
          height="30"
          viewBox="0 0 30 30"
