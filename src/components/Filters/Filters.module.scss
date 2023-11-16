@@ -1,3 +1,26 @@
-.filtersTopWrap{
-    border: 1px solid black;
+.filtersTopWrap {
+   border: 1px solid black;
+   padding: 10%;
+}
+
+.blockTitle{
+   display: flex;
+   padding: 10px;
+   font-weight: bold;
+}
+
+.filtersBlock{
+   border-bottom: 1px solid gray;
+
+}
+
+.blockGrid{
+   gap: 5px;
+   display: grid;
+   grid-template-columns: 1fr 1fr; 
+
+}
+
+.slider{
+   background-color: black;
 }
