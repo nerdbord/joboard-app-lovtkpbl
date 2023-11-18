@@ -10,20 +10,20 @@
    gap: 10px;
 }
 
-.buttonPrimary{
-    color: var(--color-white);
-    background-color: var(--color-accent);
+.buttonPrimary {
+   color: var(--color-white);
+   background-color: var(--color-accent);
 }
 
-.buttonPrimary:hover{
-    background-color: var(--color-accent-strong);
+.buttonPrimary:hover {
+   background-color: var(--color-accent-strong);
 }
 
-.buttonText{
-    color: var(--color-accent-strong);
-    background-color: transparent;
+.buttonText {
+   color: var(--color-accent-strong);
+   background-color: transparent;
 }
 
-.buttonText:hover{
-    background-color: var(--color-gray-lightest);
+.buttonText:hover {
+   background-color: var(--color-gray-lightest);
 }
