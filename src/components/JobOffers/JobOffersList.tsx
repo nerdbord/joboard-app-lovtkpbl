@@ -13,8 +13,9 @@ const JobOffersList = (props: JobOffersListProps) => {
       <>
          <p className={styles.text}>{`${props.offers.length} offers found`}</p>
          <ul className={styles.jobList}>
-            <JobOffer jobData={props.offers[0]} />
-            <JobOffer jobData={props.offers[1]} />
+            {props.offers.map((offer) => (
+               <JobOffer key={offer._id} jobData={offer} />
+            ))}
          </ul>
       </>
    );

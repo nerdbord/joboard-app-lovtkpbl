@@ -23,7 +23,6 @@ const DATA = [
       offerUrl: 'https://nerdbord.io',
       __v: 0,
       createdAt: '2023-06-15T20:55:57.198Z',
-
       updatedAt: '2023-10-14T19:49:23.972Z',
       image: 'https://i.imgur.com/yaKYWeN.png',
    },
