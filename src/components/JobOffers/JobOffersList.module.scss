@@ -1,0 +1,14 @@
+.jobList {
+   margin-top: 16px;
+   display: flex;
+   flex-direction: column;
+   gap: 8px;
+}
+
+.text {
+   font-size: 16px;
+   font-style: normal;
+   font-weight: 600;
+   line-height: 100%; /* 16px */
+   letter-spacing: -0.8px;
+}
