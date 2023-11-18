@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import styles from './Filters.module.scss';
 import classNames from 'classnames';
 import Checkbox from './Checkbox';
-import 'rc-slider/assets/index.css';
 import Slider from './Slider';
+import Button from './Button';
+import { ButtonType } from '../../enumFaces/enums';
 
 
 
@@ -17,13 +18,15 @@ const Filters = (props: FiltersProps) => {
 
    const sliderBlock = classNames(styles.filtersBlock, styles.sliderBlock)
 
-   const handleClearFilters = () => {}
+   const handleClearFilters = () => {
+      //TBI
+   }
 
    return (
       <div className={styles.filtersTopWrap}>
          <div className={topBlock}>
             <div className={styles.filtersTitle}>Filter offers</div>
-            <button className={styles.clearButton} onClick={handleClearFilters}>Clear filters</button>
+            <Button type={ButtonType.Text} onClick={handleClearFilters}>Clear filters</Button>
          </div>
          <div className={styles.filtersBlock}>
             <div className={styles.titleOfBlock}>Job type</div>
@@ -55,7 +58,7 @@ const Filters = (props: FiltersProps) => {
          </div>
          <div className={sliderBlock}>
             <div className={styles.titleOfBlock}>Salary (min.)</div>
-            <Slider />
+            <Slider min={10000} max={100000}/>
          </div>
       </div>
    );

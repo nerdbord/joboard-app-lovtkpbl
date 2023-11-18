@@ -15,8 +15,10 @@
 }
 
 .topBlock {
+   padding-top: 10px;
    display: flex;
    justify-content: space-between;
+   align-items: center;
 }
 
 .sliderBlock {
@@ -46,17 +48,4 @@
    grid-template-columns: 1fr 1fr;
 }
 
-.clearButton {
-   border: none;
-   background-color: transparent;
-   color: var(--color-accent-strong);
-   font-family: Poppins;
-   font-size: 12px;
-   font-weight: 500;
-   line-height: 12px;
-   letter-spacing: 0em;
-}
 
-.clearButton:hover {
-   color: var(--color-accent);
-}

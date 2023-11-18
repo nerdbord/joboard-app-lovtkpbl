@@ -1,0 +1,29 @@
+.buttonStyle {
+   border: none;
+   font-family: Poppins;
+   font-size: 12px;
+   font-weight: 500;
+   line-height: 12px;
+   letter-spacing: 0em;
+   padding: 10px 25px 10px 25px;
+   border-radius: 30px;
+   gap: 10px;
+}
+
+.buttonPrimary{
+    color: var(--color-white);
+    background-color: var(--color-accent);
+}
+
+.buttonPrimary:hover{
+    background-color: var(--color-accent-strong);
+}
+
+.buttonText{
+    color: var(--color-accent-strong);
+    background-color: transparent;
+}
+
+.buttonText:hover{
+    background-color: var(--color-gray-lightest);
+}
