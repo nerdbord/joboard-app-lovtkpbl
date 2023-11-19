@@ -22,7 +22,7 @@ const JobOffer = (props: JobOfferProps) => {
       <li className={styles.jobItem}>
          <div className={styles.jobContent}>
             <div className={styles.imageContainer}>
-               <img src={props.jobData.image} />
+               <img src={props.jobData.image} alt={props.jobData.companyName} />
             </div>
             <div>
                <h3 className={styles.jobTitle}>{props.jobData.title}</h3>
