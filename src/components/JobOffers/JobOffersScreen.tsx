@@ -1,5 +1,6 @@
 import styles from './JobOffersScreen.module.scss';
 import { JobData } from '../../types';
+import { IconType } from '../../enums';
 
 // components
 import JobOffersList from './JobOffersList';
@@ -13,8 +14,8 @@ const JobOffersScreen = (props: JobOffersProps) => {
    return (
       <section className={styles.screen}>
          <form className={styles.form}>
-            <Input icon="search" placeholder="Search for" />
-            <Input icon="location" placeholder="Search location" />
+            <Input icon={IconType.Search} placeholder="Search for" />
+            <Input icon={IconType.Location} placeholder="Search location" />
          </form>
          <JobOffersList offers={props.offers} />
       </section>
