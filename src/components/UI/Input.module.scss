@@ -1,0 +1,29 @@
+.wrapper {
+   position: relative;
+   width: 100%;
+}
+
+.input {
+   width: 100%;
+   height: 50px;
+
+   padding-left: 24px;
+   padding-right: 50px;
+   padding-block: 6.25px;
+
+   color: var(--color-gray-dark);
+
+   border: none;
+   border-radius: 5px;
+   box-shadow: var(--shadow-checkbox);
+
+   font-family: inherit;
+   font-size: 14px;
+   font-weight: 500;
+}
+
+.icon {
+   position: absolute;
+   right: 10px;
+   top: 10px;
+}
