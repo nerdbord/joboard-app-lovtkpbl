@@ -1,7 +1,7 @@
 import styles from './JobOffersScreen.module.scss';
 import { IconType } from '../../enums';
 import { useQuery } from '@tanstack/react-query';
-import fetchJobOffers from '../../helpers/api';
+import { JobData } from '../../types';
 
 // components
 import JobOffersList from './JobOffersList';
@@ -11,10 +11,10 @@ import Loader from '../UI/Loader';
 interface JobOffersProps {}
 
 const JobOffersScreen = (props: JobOffersProps) => {
-   const { data, error, isFetching, isPending, isError } = useQuery({
-      queryKey: ['jobOffers'],
-      queryFn: fetchJobOffers,
+   const { data, error, isFetching, isPending, isError } = useQuery<JobData[]>({
+      queryKey: ['/offers'],
    });
+
    return (
       <section className={styles.screen}>
          <section>
