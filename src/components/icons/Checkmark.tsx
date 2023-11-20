@@ -8,8 +8,8 @@ const Checkmark = (props: CheckmarkProps) => {
          <path
             d="M1 4L4.5 7.5L11 1"
             stroke="#9564D4"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
          />
       </svg>
    );
