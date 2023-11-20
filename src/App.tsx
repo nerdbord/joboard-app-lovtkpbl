@@ -1,32 +1,22 @@
-import { useEffect, useState } from 'react';
-import './App.module.scss';
-
-// import { useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { fetchJobOffers } from './helpers/api';
+import './App.module.scss';
 
 // components
 import Container from './components/Container/Container';
 import JobOffersScreen from './components/JobOffers/JobOffersScreen';
 
 const App = () => {
-   const [jobOffers, setJobOffers] = useState([]);
+   const query = useQuery({
+      queryKey: ['jobOffers'],
+      queryFn: fetchJobOffers,
+   });
 
-   useEffect(() => {
-      const fetchData = async () => {
-         try {
-            const result = await fetchJobOffers();
-            setJobOffers(result);
-         } catch (error) {
-            console.error('Error fetching job offers');
-         }
-      };
-
-      fetchData();
-   }, []);
+   console.log(query);
 
    return (
       <Container>
-         <JobOffersScreen offers={jobOffers} />
+         <JobOffersScreen offers={query.data} />
       </Container>
    );
 };
