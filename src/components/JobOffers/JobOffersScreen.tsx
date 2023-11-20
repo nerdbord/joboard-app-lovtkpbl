@@ -6,6 +6,7 @@ import fetchJobOffers from '../../helpers/api';
 // components
 import JobOffersList from './JobOffersList';
 import Input from '../UI/Input';
+import Loader from '../UI/Loader';
 
 interface JobOffersProps {}
 
@@ -24,13 +25,13 @@ const JobOffersScreen = (props: JobOffersProps) => {
          </section>
          <section>
             {isPending ? (
-               'Loading...'
+               <Loader />
             ) : isError ? (
                <span>Error: {error.message}</span>
             ) : (
                <>
                   {/* this is just for debugging i guess */}
-                  <div>{isFetching ? 'Background Updating...' : ' '}</div>
+                  {isFetching && <span>Background Updating...</span>}
 
                   <JobOffersList offers={data} />
                </>
