@@ -4,6 +4,8 @@ import Container from './components/Container/Container';
 import Checkbox from './components/UI/Checkbox';
 import Filters from './components/Filters/Filters';
 import JobOffersScreen from './components/JobOffers/JobOffersScreen';
+import { FilterTypes } from './enumFaces/enums';
+import { FilterSettings } from './enumFaces/interfaces';
 
 const DATA = [
    {
@@ -51,10 +53,11 @@ const DATA = [
 ];
 
 const App = () => {
+   const settings: FilterSettings
    return (
       <Container>
          <h1>JoBoard 🛹</h1>
-         <Filters />
+         <Filters settings={settings} />
          <JobOffersScreen offers={DATA} />
       </Container>
    );
