@@ -1,5 +1,5 @@
 import { QueryKey } from '@tanstack/query-core';
-import { JobData } from '../types';
+import { JobData } from './types';
 
 export async function fetchJobOffers({ queryKey }: { queryKey: QueryKey }) {
    const API_ENDPOINT = `https://training.nerdbord.io/api/v1/joboard${queryKey[0]}`;
