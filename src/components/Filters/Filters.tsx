@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styles from './Filters.module.scss';
 import classNames from 'classnames';
 import Checkbox from '../UI/Checkbox';
@@ -6,15 +6,18 @@ import Slider from '../UI/Slider';
 import Button from '../UI/Button';
 import { ButtonType, FilterTypes } from '../../enumFaces/enums';
 import { FilterSettings } from '../../enumFaces/interfaces';
+import { FilterContext } from './FilterContext';
 
 
 
 interface FiltersProps {
-   settings: FilterSettings
+
 }
 
 
 const Filters = (props: FiltersProps) => {
+
+   const { filterSettings, setFilterSettings } = useContext(FilterContext);
 
    
    const topBlock = classNames(styles.filtersBlock, styles.topBlock)   
@@ -22,7 +25,7 @@ const Filters = (props: FiltersProps) => {
    const sliderBlock = classNames(styles.filtersBlock, styles.sliderBlock)
 
    const handleClearFilters = () => {
-      //TBI
+      console.log(filterSettings);
    }
 
    return (
@@ -34,34 +37,34 @@ const Filters = (props: FiltersProps) => {
          <div className={styles.filtersBlock}>
             <div className={styles.titleOfBlock}>Job type</div>
             <div className={styles.blockGrid}>
-               <Checkbox option={FilterTypes.fullTime} settingsObject={props.settings} />
-               <Checkbox option={FilterTypes.partTime} settingsObject={props.settings} />
-               <Checkbox option={FilterTypes.contract} settingsObject={props.settings} />
-               <Checkbox option={FilterTypes.freelance} settingsObject={props.settings} />
+               <Checkbox option={FilterTypes.fullTime} />
+               <Checkbox option={FilterTypes.partTime} />
+               <Checkbox option={FilterTypes.contract} />
+               <Checkbox option={FilterTypes.freelance} />
             </div>
          </div>
          <div className={styles.filtersBlock}>
             <div className={styles.titleOfBlock}>Seniority</div>
             <div className={styles.blockGrid}>
-            <Checkbox option={FilterTypes.lead} settingsObject={props.settings} />
-            <Checkbox option={FilterTypes.expert} settingsObject={props.settings} />
-            <Checkbox option={FilterTypes.senior} settingsObject={props.settings} />
-            <Checkbox option={FilterTypes.midRegular} settingsObject={props.settings} />
-            <Checkbox option={FilterTypes.junior} settingsObject={props.settings} />
-            <Checkbox option={FilterTypes.intern} settingsObject={props.settings} />
+            <Checkbox option={FilterTypes.lead} />
+            <Checkbox option={FilterTypes.expert} />
+            <Checkbox option={FilterTypes.senior} />
+            <Checkbox option={FilterTypes.midRegular} />
+            <Checkbox option={FilterTypes.junior} />
+            <Checkbox option={FilterTypes.intern} />
             </div>
          </div>
          <div className={styles.filtersBlock}>
             <div className={styles.titleOfBlock}>Location</div>
             <div className={styles.blockGrid}>
-            <Checkbox option={FilterTypes.remote} settingsObject={props.settings} />
-            <Checkbox option={FilterTypes.partRemote} settingsObject={props.settings} />
-            <Checkbox option={FilterTypes.onSite} settingsObject={props.settings} />
+            <Checkbox option={FilterTypes.remote} />
+            <Checkbox option={FilterTypes.partRemote} />
+            <Checkbox option={FilterTypes.onSite} />
             </div>
          </div>
          <div className={sliderBlock}>
             <div className={styles.titleOfBlock}>Salary (min.)</div>
-            <Slider min={10000} max={100000} settingsObject={props.settings}/>
+            <Slider min={10000} max={100000} />
          </div>
       </div>
    );
