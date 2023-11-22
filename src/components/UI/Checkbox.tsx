@@ -3,17 +3,17 @@ import styles from './Checkbox.module.scss';
 import Checkmark from '../icons/Checkmark';
 import classNames from 'classnames';
 import { FilterTypes } from '../../enumFaces/enums';
-import { FilterContext } from '../Filters/FilterContext';
 import { getFilterText } from '../../helpers/getFilterText';
+import { useFilter, useFilterUpdate } from '../Filters/FilterContext';
 
 interface CheckboxProps {
    option: FilterTypes;
 }
 
 const Checkbox = (props: CheckboxProps) => {
-   const { filterSettings, setFilterSettings } = useContext(FilterContext);
-   const checkValue = filterSettings[props.option];
-   const [refresher, useRefresh] = useState(false)
+   const filterSettings = useFilter()
+   const filterUpdate = useFilterUpdate()
+   const checkValue = filterSettings[props.option]
 
    const rectangleStyle = classNames(
       styles.checkboxRectangle,
@@ -25,12 +25,7 @@ const Checkbox = (props: CheckboxProps) => {
    );
 
    const handleCheck = () => {
-      console.log(filterSettings[props.option]);
-      setFilterSettings((prevState) => ({
-         ...prevState,
-         [props.option]: !prevState[props.option],
-      }));
-      useRefresh(prev => !prev)
+      filterUpdate(props.option)
    };
    return (
       <div className={styles.checkboxTopWrap} onClick={handleCheck}>

@@ -6,7 +6,8 @@ import Slider from '../UI/Slider';
 import Button from '../UI/Button';
 import { ButtonType, FilterTypes } from '../../enumFaces/enums';
 import { FilterSettings } from '../../enumFaces/interfaces';
-import { FilterContext } from './FilterContext';
+import { initialFilterSettings, useFilter, useFilterReset, useFilterUpdate } from './FilterContext';
+
 
 
 
@@ -16,23 +17,19 @@ interface FiltersProps {
 
 
 const Filters = (props: FiltersProps) => {
-
-   const { filterSettings, setFilterSettings } = useContext(FilterContext);
-
+   const resetFilterSettings = useFilterReset()
    
    const topBlock = classNames(styles.filtersBlock, styles.topBlock)   
 
    const sliderBlock = classNames(styles.filtersBlock, styles.sliderBlock)
 
-   const handleClearFilters = () => {
-      console.log(filterSettings);
-   }
+
 
    return (
       <div className={styles.filtersTopWrap}>
          <div className={topBlock}>
             <div className={styles.filtersTitle}>Filter offers</div>
-            <Button type={ButtonType.Text} onClick={handleClearFilters}>Clear filters</Button>
+            <Button type={ButtonType.Text} onClick={resetFilterSettings}>Clear filters</Button>
          </div>
          <div className={styles.filtersBlock}>
             <div className={styles.titleOfBlock}>Job type</div>

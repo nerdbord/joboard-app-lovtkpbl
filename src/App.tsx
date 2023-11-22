@@ -7,7 +7,10 @@ import JobOffersScreen from './components/JobOffers/JobOffersScreen';
 import { FilterTypes } from './enumFaces/enums';
 import { FilterSettings } from './enumFaces/interfaces';
 import { useState } from 'react';
-import { FilterContext, initialFilterSettings } from './components/Filters/FilterContext';
+import {
+   FiltersProvider,
+   initialFilterSettings,
+} from './components/Filters/FilterContext';
 
 const DATA = [
    {
@@ -58,15 +61,10 @@ const App = () => {
    return (
       <Container>
          <h1>JoBoard 🛹</h1>
-         <FilterContext.Provider
-            value={{
-               filterSettings: initialFilterSettings,
-               setFilterSettings: () => {},
-            }}
-         >
+         <FiltersProvider>
             <Filters />
             <JobOffersScreen offers={DATA} />
-         </FilterContext.Provider>
+         </FiltersProvider>
       </Container>
    );
 };

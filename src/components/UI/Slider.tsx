@@ -1,6 +1,8 @@
 import React, { ChangeEvent, useRef, useState } from 'react';
 import styles from './Slider.module.scss';
 import classNames from 'classnames';
+import { useFilter, useFilterUpdate } from '../Filters/FilterContext';
+import { FilterTypes } from '../../enumFaces/enums';
 
 interface SliderProps {
    min: number;
@@ -8,12 +10,13 @@ interface SliderProps {
 }
 
 const Slider = (props: SliderProps) => {
-   const [sliderVal, setSliderVal] = useState(props.min);
+   const sliderVal = useFilter().salary
+   const setSliderVal = useFilterUpdate();
    const [percentVal, setpercentVal] = useState(0);
 
    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const currVal = parseInt(event.target.value);
-      setSliderVal(currVal);
+      setSliderVal(FilterTypes.salary, currVal)
       const currPercentVal = ((currVal - props.min) / (props.max - props.min)) * 100;
       const thumbOffset = 6; // these lines below exist due to padding used for thumb border effect
       const minPercentVal = (thumbOffset / (event.target.clientWidth - thumbOffset)) * 100;
