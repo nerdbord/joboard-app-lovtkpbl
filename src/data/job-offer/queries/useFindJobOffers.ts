@@ -1,12 +1,14 @@
-import { QueryKey, useQuery } from '@tanstack/react-query';
-import { JobData } from '../../../types';
+import { useQuery } from '@tanstack/react-query';
+import { Filter, JobData } from '../../../types';
 
-export const jobOffersQueryKey = ['/offers'];
-
-const useFindJobOffers = (queryKey: QueryKey) => {
+const useFindJobOffers = (filterOptions: Filter) => {
+   const queryKey = ['/offers', filterOptions];
    const { data, error, isFetching, isPending, isError, refetch } = useQuery<JobData[]>({
-      queryKey: queryKey,
+      queryKey,
    });
+
+   // use filter options here to return the exact data you want
+
    return { data, error, isFetching, isPending, isError, refetch };
 };
 
