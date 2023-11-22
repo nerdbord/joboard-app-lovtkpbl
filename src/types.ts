@@ -20,18 +20,18 @@ export type JobData = {
 };
 
 export type Filter = {
-   fullTime: true;
-   partTime: true;
-   contract: true;
-   freelance: true;
-   lead: true;
-   expert: true;
-   senior: true;
-   midRegular: true;
-   junior: true;
-   intern: true;
-   remote: true;
-   partRemote: true;
-   onSite: true;
-   salary: 0;
+   fullTime: boolean;
+   partTime: boolean;
+   contract: boolean;
+   freelance: boolean;
+   lead: boolean;
+   expert: boolean;
+   senior: boolean;
+   midRegular: boolean;
+   junior: boolean;
+   intern: boolean;
+   remote: boolean;
+   partRemote: boolean;
+   onSite: boolean;
+   salary: number;
 };

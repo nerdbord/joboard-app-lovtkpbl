@@ -9,19 +9,19 @@ import Input from '../UI/Input';
 import Loader from '../UI/Loader';
 
 const initialFilterSettings: Filter = {
-   fullTime: true,
-   partTime: true,
-   contract: true,
-   freelance: true,
-   lead: true,
-   expert: true,
-   senior: true,
-   midRegular: true,
+   fullTime: false,
+   partTime: false,
+   contract: false,
+   freelance: false,
+   lead: false,
+   expert: false,
+   senior: false,
+   midRegular: false,
    junior: true,
-   intern: true,
-   remote: true,
-   partRemote: true,
-   onSite: true,
+   intern: false,
+   remote: false,
+   partRemote: false,
+   onSite: false,
    salary: 0,
 };
 
