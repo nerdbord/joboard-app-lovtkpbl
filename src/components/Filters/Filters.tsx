@@ -1,12 +1,12 @@
-import React, { useContext, useState } from 'react';
 import styles from './Filters.module.scss';
 import classNames from 'classnames';
+import { useFilterReset } from './FilterContext';
+import { ButtonType, FilterTypes } from '../../enums';
+
+// components
 import Checkbox from '../UI/Checkbox';
 import Slider from '../UI/Slider';
 import Button from '../UI/Button';
-import { ButtonType, FilterTypes } from '../../enumFaces/enums';
-import { FilterSettings } from '../../interfaces';
-import { initialFilterSettings, useFilter, useFilterReset, useFilterUpdate } from './FilterContext';
 
 interface FiltersProps {}
 

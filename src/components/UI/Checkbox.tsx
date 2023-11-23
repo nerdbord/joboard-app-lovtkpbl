@@ -1,19 +1,20 @@
-import React, { useContext, useState } from 'react';
 import styles from './Checkbox.module.scss';
-import Checkmark from '../icons/Checkmark';
 import classNames from 'classnames';
-import { FilterTypes } from '../../enumFaces/enums';
+import { FilterTypes } from '../../enums';
 import { getFilterText } from '../../helpers/getFilterText';
 import { useFilter, useFilterUpdate } from '../Filters/FilterContext';
+
+// compopnents
+import Checkmark from '../icons/Checkmark';
 
 interface CheckboxProps {
    option: FilterTypes;
 }
 
 const Checkbox = (props: CheckboxProps) => {
-   const filterSettings = useFilter()
-   const filterUpdate = useFilterUpdate()
-   const checkValue = filterSettings[props.option]
+   const filterSettings = useFilter();
+   const filterUpdate = useFilterUpdate();
+   const checkValue = filterSettings[props.option];
 
    const rectangleStyle = classNames(
       styles.checkboxRectangle,
@@ -25,7 +26,7 @@ const Checkbox = (props: CheckboxProps) => {
    );
 
    const handleCheck = () => {
-      filterUpdate(props.option)
+      filterUpdate(props.option);
    };
    return (
       <div className={styles.checkboxTopWrap} onClick={handleCheck}>

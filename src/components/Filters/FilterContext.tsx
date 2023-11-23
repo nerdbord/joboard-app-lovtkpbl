@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 import { FilterSettings } from '../../interfaces';
-import { FilterTypes } from '../../enumFaces/enums';
+import { FilterTypes } from '../../enums';
 
 export const initialFilterSettings: FilterSettings = {
    fullTime: true,
