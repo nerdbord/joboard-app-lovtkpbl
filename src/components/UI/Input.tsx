@@ -2,8 +2,8 @@ import styles from './Input.module.scss';
 import { IconType } from '../../enums';
 
 // components
-import LocationIcon from '../../icons/LocationIcon';
-import SearchIcon from '../../icons/SearchIcon';
+import LocationIcon from '../icons/LocationIcon';
+import SearchIcon from '../icons/SearchIcon';
 
 interface InputProps {
    placeholder?: string;

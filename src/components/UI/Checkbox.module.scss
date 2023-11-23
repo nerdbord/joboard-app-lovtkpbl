@@ -1,0 +1,32 @@
+.checkboxTopWrap {
+   user-select: none;
+   display: flex;
+   align-items: center;
+}
+
+.checkboxRectangle {
+   width: 19px;
+   height: 19px;
+   border-radius: 5px;
+   border: 1px solid var(--color-accent);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.checkboxChecked {
+   background-color: #9564d410;
+   box-shadow: var(--shadow-checkbox);
+}
+
+.mainTextStyle {
+   padding-left: 10px;
+}
+
+.checkedText {
+   color: var(--color-gray-darkest);
+}
+
+.uncheckedText {
+   color: var(--color-gray-dark);
+}
