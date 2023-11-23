@@ -11,6 +11,7 @@ import Button from '../UI/Button';
 interface FiltersProps {}
 
 const Filters = (props: FiltersProps) => {
+   //this line below contains a filter resetting hook
    const resetFilterSettings = useFilterReset();
 
    const topBlock = classNames(styles.filtersBlock, styles.topBlock);

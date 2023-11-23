@@ -51,7 +51,7 @@ export function FiltersProvider({ children }: { children: React.ReactNode }) {
          }));
       }
    }
-
+   //filters are being cleared below this line
    function resetSettings() {
       setFilterSettings(initialFilterSettings);
    }
