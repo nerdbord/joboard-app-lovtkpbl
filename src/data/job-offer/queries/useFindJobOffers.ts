@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { Filter, JobData } from '../../../types';
 
-const useFindJobOffers = (filterOptions: Filter) => {
-   const queryKey = ['/offers', filterOptions];
+const useFindJobOffers = () => {
+   const queryKey = ['/offers'];
    const { data, error, isFetching, isPending, isError, refetch } = useQuery<JobData[]>({
       queryKey,
    });

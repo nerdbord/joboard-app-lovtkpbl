@@ -1,7 +1,6 @@
 import styles from './JobOffersScreen.module.scss';
 import { IconType } from '../../enums';
 import useFindJobOffers from '../../data/job-offer/queries/useFindJobOffers';
-import { useFilter } from '../Filters/FilterContext';
 
 // components
 import JobOffersList from './JobOffersList';
@@ -11,8 +10,7 @@ import Loader from '../UI/Loader';
 interface JobOffersProps {}
 
 const JobOffersScreen = (props: JobOffersProps) => {
-   const filterSettings = useFilter();
-   const { data, error, isFetching, isPending } = useFindJobOffers(filterSettings);
+   const { data, error, isFetching, isPending } = useFindJobOffers();
 
    return (
       <section className={styles.screen}>
