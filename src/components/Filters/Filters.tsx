@@ -1,35 +1,30 @@
-import React, { useContext, useState } from 'react';
 import styles from './Filters.module.scss';
 import classNames from 'classnames';
+import { useFilterReset } from './FilterContext';
+import { ButtonType, FilterTypes } from '../../enums';
+
+// components
 import Checkbox from '../UI/Checkbox';
 import Slider from '../UI/Slider';
 import Button from '../UI/Button';
-import { ButtonType, FilterTypes } from '../../enumFaces/enums';
-import { FilterSettings } from '../../enumFaces/interfaces';
-import { initialFilterSettings, useFilter, useFilterReset, useFilterUpdate } from './FilterContext';
 
-
-
-
-interface FiltersProps {
-
-}
-
+interface FiltersProps {}
 
 const Filters = (props: FiltersProps) => {
-   const resetFilterSettings = useFilterReset()
-   
-   const topBlock = classNames(styles.filtersBlock, styles.topBlock)   
+   //this line below contains a filter resetting hook
+   const resetFilterSettings = useFilterReset();
 
-   const sliderBlock = classNames(styles.filtersBlock, styles.sliderBlock)
+   const topBlock = classNames(styles.filtersBlock, styles.topBlock);
 
-
+   const sliderBlock = classNames(styles.filtersBlock, styles.sliderBlock);
 
    return (
       <div className={styles.filtersTopWrap}>
          <div className={topBlock}>
             <div className={styles.filtersTitle}>Filter offers</div>
-            <Button type={ButtonType.Text} onClick={resetFilterSettings}>Clear filters</Button>
+            <Button type={ButtonType.Text} onClick={resetFilterSettings}>
+               Clear filters
+            </Button>
          </div>
          <div className={styles.filtersBlock}>
             <div className={styles.titleOfBlock}>Job type</div>
@@ -43,20 +38,20 @@ const Filters = (props: FiltersProps) => {
          <div className={styles.filtersBlock}>
             <div className={styles.titleOfBlock}>Seniority</div>
             <div className={styles.blockGrid}>
-            <Checkbox option={FilterTypes.lead} />
-            <Checkbox option={FilterTypes.expert} />
-            <Checkbox option={FilterTypes.senior} />
-            <Checkbox option={FilterTypes.midRegular} />
-            <Checkbox option={FilterTypes.junior} />
-            <Checkbox option={FilterTypes.intern} />
+               <Checkbox option={FilterTypes.lead} />
+               <Checkbox option={FilterTypes.expert} />
+               <Checkbox option={FilterTypes.senior} />
+               <Checkbox option={FilterTypes.midRegular} />
+               <Checkbox option={FilterTypes.junior} />
+               <Checkbox option={FilterTypes.intern} />
             </div>
          </div>
          <div className={styles.filtersBlock}>
             <div className={styles.titleOfBlock}>Location</div>
             <div className={styles.blockGrid}>
-            <Checkbox option={FilterTypes.remote} />
-            <Checkbox option={FilterTypes.partRemote} />
-            <Checkbox option={FilterTypes.onSite} />
+               <Checkbox option={FilterTypes.remote} />
+               <Checkbox option={FilterTypes.partRemote} />
+               <Checkbox option={FilterTypes.onSite} />
             </div>
          </div>
          <div className={sliderBlock}>

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './Button.module.scss';
 import classNames from 'classnames';
-import { ButtonType } from '../../enumFaces/enums';
+import { ButtonType } from '../../enums';
 
 interface ButtonProps {
    type: ButtonType;

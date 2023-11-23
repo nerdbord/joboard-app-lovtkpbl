@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react';
-import { FilterSettings } from '../../enumFaces/interfaces';
-import { FilterTypes } from '../../enumFaces/enums';
+import { FilterSettings } from '../../interfaces';
+import { FilterTypes } from '../../enums';
 
 export const initialFilterSettings: FilterSettings = {
    fullTime: true,
@@ -51,9 +51,9 @@ export function FiltersProvider({ children }: { children: React.ReactNode }) {
          }));
       }
    }
-
+   //filters are being cleared below this line
    function resetSettings() {
-      setFilterSettings(initialFilterSettings)
+      setFilterSettings(initialFilterSettings);
    }
 
    return (

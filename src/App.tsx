@@ -1,24 +1,21 @@
-import './App.module.scss';
+import styles from './App.module.scss';
 // components
 import Container from './components/Container/Container';
-import Checkbox from './components/UI/Checkbox';
 import Filters from './components/Filters/Filters';
 import JobOffersScreen from './components/JobOffers/JobOffersScreen';
-import { FilterTypes } from './enumFaces/enums';
-import { FilterSettings } from './enumFaces/interfaces';
-import { useState } from 'react';
-import {
-   FiltersProvider,
-   initialFilterSettings,
-} from './components/Filters/FilterContext';
+import { FiltersProvider } from './components/Filters/FilterContext';
 
 const App = () => {
    return (
       <Container>
-         <h1>JoBoard 🛹</h1>
          <FiltersProvider>
-            <Filters />
-            <JobOffersScreen />
+            <div className={styles.mainScreen}>
+               <section className={styles.filtersSection}>
+                  <h1>👾 JO-BOARD</h1>
+                  <Filters />
+               </section>
+               <JobOffersScreen />
+            </div>
          </FiltersProvider>
       </Container>
    );

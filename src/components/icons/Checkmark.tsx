@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface CheckmarkProps {}
 
 const Checkmark = (props: CheckmarkProps) => {
