@@ -1,6 +1,6 @@
 import { FilterTypes } from '../enums';
 
-export function getFilterText(option: FilterTypes) {
+export function getFilterText(option: FilterTypes | string) {
    switch (option) {
       case FilterTypes.fullTime:
          return 'Full-time';
@@ -30,5 +30,7 @@ export function getFilterText(option: FilterTypes) {
          return 'On-site';
       case FilterTypes.salary:
          return 'salary';
+      default:
+         return option;
    }
 }
