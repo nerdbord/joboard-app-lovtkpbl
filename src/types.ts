@@ -18,3 +18,20 @@ export type JobData = {
    updatedAt: string;
    image: string;
 };
+
+export type Filter = {
+   fullTime: boolean;
+   partTime: boolean;
+   contract: boolean;
+   freelance: boolean;
+   lead: boolean;
+   expert: boolean;
+   senior: boolean;
+   midRegular: boolean;
+   junior: boolean;
+   intern: boolean;
+   remote: boolean;
+   partRemote: boolean;
+   onSite: boolean;
+   salary: number;
+};
