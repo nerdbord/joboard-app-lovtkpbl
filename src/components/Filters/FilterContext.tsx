@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from 'react';
-import { FilterSettings } from '../../enumFaces/interfaces';
+import { FilterSettings } from '../../interfaces';
 import { FilterTypes } from '../../enumFaces/enums';
 
 export const initialFilterSettings: FilterSettings = {
@@ -53,7 +53,7 @@ export function FiltersProvider({ children }: { children: React.ReactNode }) {
    }
 
    function resetSettings() {
-      setFilterSettings(initialFilterSettings)
+      setFilterSettings(initialFilterSettings);
    }
 
    return (
