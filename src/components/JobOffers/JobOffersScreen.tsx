@@ -1,34 +1,18 @@
 import styles from './JobOffersScreen.module.scss';
 import { IconType } from '../../enums';
 import useFindJobOffers from '../../data/job-offer/queries/useFindJobOffers';
-import { Filter } from '../../types';
+import { useFilter } from '../Filters/FilterContext';
 
 // components
 import JobOffersList from './JobOffersList';
 import Input from '../UI/Input';
 import Loader from '../UI/Loader';
 
-const initialFilterSettings: Filter = {
-   fullTime: false,
-   partTime: false,
-   contract: false,
-   freelance: false,
-   lead: false,
-   expert: false,
-   senior: false,
-   midRegular: false,
-   junior: true,
-   intern: false,
-   remote: false,
-   partRemote: false,
-   onSite: false,
-   salary: 0,
-};
-
 interface JobOffersProps {}
 
 const JobOffersScreen = (props: JobOffersProps) => {
-   const { data, error, isFetching, isPending } = useFindJobOffers(initialFilterSettings);
+   const filterSettings = useFilter();
+   const { data, error, isFetching, isPending } = useFindJobOffers(filterSettings);
 
    return (
       <section className={styles.screen}>
