@@ -13,6 +13,7 @@ export interface FilterSettings {
     partRemote: boolean;
     onSite: boolean;
     salary: number;
+    [key: string]: boolean | number;
 }
 
 export interface FilterSettingsArray {

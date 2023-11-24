@@ -9,9 +9,14 @@ interface SliderProps {
 }
 
 const Slider = (props: SliderProps) => {
-   const sliderVal = props.currentValue;
+   const sliderVal = useFilter().salary
    const setSliderVal = useFilterUpdate();
-   const [percentVal, setpercentVal] = useState((props.currentValue/props.max)*100);
+   const [percentVal, setpercentVal] = useState((sliderVal/props.max)*100);
+
+   setTimeout(() => {
+      setpercentVal((sliderVal/props.max)*100)
+   },1)
+
 
    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const currVal = parseInt(event.target.value);
@@ -28,12 +33,13 @@ const Slider = (props: SliderProps) => {
    return (
       <div className={styles.sliderTop}>
          <div className={styles.thumbFollower} style={{ left: `${percentVal}%` }}>
-            {sliderVal}
+            {sliderVal == 0 ? "0" : sliderVal}
          </div>
          <input
             type="range"
             className={styles.sliderMain}
             onChange={handleChange}
+            value={sliderVal}
             min={0}
             max={props.max}
          />

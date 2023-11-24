@@ -1,6 +1,6 @@
 import { FilterTypes } from '../enums';
 
-export function getFilterGroup(option: FilterTypes) {
+export function getFilterGroup(option: FilterTypes|string) {
    switch (option) {
       case FilterTypes.fullTime:
       case FilterTypes.partTime:

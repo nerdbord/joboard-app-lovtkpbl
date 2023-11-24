@@ -17,6 +17,7 @@ export type JobData = {
    createdAt: string;
    updatedAt: string;
    image: string;
+   [key: string]: string | string[] | number;
 };
 
 export type Filter = {
