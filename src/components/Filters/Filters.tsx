@@ -7,12 +7,21 @@ import { ButtonType, FilterTypes } from '../../enums';
 import Checkbox from '../UI/Checkbox';
 import Slider from '../UI/Slider';
 import Button from '../UI/Button';
+import useFindJobOffers from '../../data/job-offer/queries/useFindJobOffers';
+import { useState } from 'react';
 
 interface FiltersProps {}
 
 const Filters = (props: FiltersProps) => {
    //this line below contains a filter resetting hook
    const resetFilterSettings = useFilterReset();
+   const [minSalary, setMinSalary] = useState(0);
+
+   const { data } = useFindJobOffers();
+
+   data?.forEach((offer) => {
+      if (offer.salaryTo > minSalary) setMinSalary(offer.salaryTo);
+   });
 
    const topBlock = classNames(styles.filtersBlock, styles.topBlock);
 
@@ -56,7 +65,7 @@ const Filters = (props: FiltersProps) => {
          </div>
          <div className={sliderBlock}>
             <div className={styles.titleOfBlock}>Salary (min.)</div>
-            <Slider min={10000} max={100000} />
+            <Slider min={0} max={minSalary} />
          </div>
       </div>
    );

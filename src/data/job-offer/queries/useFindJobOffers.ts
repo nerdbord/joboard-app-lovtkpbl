@@ -1,17 +1,18 @@
 import { useQuery } from '@tanstack/react-query';
-import { Filter, JobData } from '../../../types';
+import { JobData } from '../../../types';
+import { useFilter } from '../../../components/Filters/FilterContext';
+import { getFilteredOffers } from '../../../helpers/getFilteredOffers';
 
 const useFindJobOffers = () => {
+   const filterSettings = useFilter();
    const queryKey = ['/offers'];
    const { data, error, isFetching, isPending, isError, refetch } = useQuery<JobData[]>({
       queryKey,
    });
 
    // use filter options here to return the exact data you want
-   const filteredData = data?.filter((offer) => {
-      //  TODO filtering
-      return true;
-   });
+   const filteredData = getFilteredOffers(data, filterSettings);
+   // useFilterUpdate(FilterTypes.salary, );
 
    return { data: filteredData, error, isFetching, isPending, isError, refetch };
 };
