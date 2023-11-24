@@ -16,7 +16,7 @@ export const initialFilterSettings: FilterSettings = {
    remote: true,
    partRemote: true,
    onSite: true,
-   salary: 10000,
+   salary: 0,
 };
 
 const FilterContext = createContext<FilterSettings>(initialFilterSettings);

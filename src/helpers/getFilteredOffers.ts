@@ -3,15 +3,14 @@ import { JobData } from '../types';
 import { getFilterText } from './getFilterText';
 import { getGroupedFilters } from './getGroupedFilters';
 
-export function getFilteredOffers(offers: JobData[], filterSettings: FilterSettings) {
-
-   const filteredOffers = offers.filter((offer, i, a) => {
+export function getFilteredOffers(offers: JobData[] | undefined, filterSettings: FilterSettings) {
+   const filteredOffers = offers?.filter((offer, i, a) => {
       const groupedFilters = getGroupedFilters(filterSettings);
       const filterSalary = filterSettings.salary;
 
       let filterToggle = false;
 
-      if (filterSalary >= offer.salaryFrom && filterSalary <= offer.salaryTo) {
+      if (filterSalary <= offer.salaryTo) {
          filterToggle = true;
       }
 
