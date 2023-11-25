@@ -16,8 +16,8 @@ const JobOffersScreen = (props: JobOffersProps) => {
       <section className={styles.screen}>
          <section>
             <form className={styles.form}>
-               <Input icon={IconType.Search} placeholder="Search for" />
-               <Input icon={IconType.Location} placeholder="Search location" />
+               <Input icon={IconType.Search} placeholder="Search for" offers={data || []}/>
+               <Input icon={IconType.Location} placeholder="Search location" offers={data || []} />
             </form>
          </section>
          <section>
