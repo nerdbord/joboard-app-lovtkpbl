@@ -13,9 +13,8 @@ import { useState } from 'react';
 interface FiltersProps {}
 
 const Filters = (props: FiltersProps) => {
-   //this line below contains a filter resetting hook
-   const resetFilterSettings = useFilterReset();
-   const currentSalary = useFilter().salary;
+
+   const resetFilterSettings = useFilterReset()
    const [maxSalary, setMaxSalary] = useState(0);
 
    const { data } = useFindJobOffers();
@@ -23,6 +22,8 @@ const Filters = (props: FiltersProps) => {
    data?.forEach((offer) => {
       if (offer.salaryTo > maxSalary) setMaxSalary(offer.salaryTo);
    });
+
+
 
    const topBlock = classNames(styles.filtersBlock, styles.topBlock);
 
@@ -66,7 +67,7 @@ const Filters = (props: FiltersProps) => {
          </div>
          <div className={sliderBlock}>
             <div className={styles.titleOfBlock}>Salary (min.)</div>
-            <Slider currentValue={currentSalary} max={maxSalary} />
+            <Slider max={maxSalary} />
          </div>
       </div>
    );
