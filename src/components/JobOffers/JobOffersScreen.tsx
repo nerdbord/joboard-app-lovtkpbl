@@ -28,11 +28,9 @@ const JobOffersScreen = (props: JobOffersProps) => {
             ) : (
                <>
                   {/* this is just for debugging i guess */}
-                  {isFetching ? (
-                     <span>Background Updating...</span>
-                  ) : (
-                     <JobOffersList offers={data || []} />
-                  )}
+                  {isFetching && <span>Background Updating...</span>}
+
+                  <JobOffersList offers={data || []} />
                </>
             )}
          </section>
