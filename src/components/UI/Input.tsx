@@ -31,8 +31,8 @@ const Input: React.FC<InputProps> = (props) => {
          return title;
       }
 
-      const inputRegex = new RegExp(`(${trimmedInput})`, 'ig');
       //leading/trailing whitespaces apparently are lost in basic HTML, so we have to replace them with a different character
+      const inputRegex = new RegExp(`(${trimmedInput.replaceAll(" ", '\u00A0')})`, 'ig');
       const titleParts = title.replaceAll(" ", '\u00A0').split(inputRegex);
 
       return (
