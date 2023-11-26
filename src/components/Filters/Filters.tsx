@@ -1,18 +1,29 @@
 import styles from './Filters.module.scss';
 import classNames from 'classnames';
-import { useFilterReset } from './FilterContext';
+import { useFilter, useFilterReset } from './FilterContext';
 import { ButtonType, FilterTypes } from '../../enums';
 
 // components
 import Checkbox from '../UI/Checkbox';
 import Slider from '../UI/Slider';
 import Button from '../UI/Button';
+import useFindJobOffers from '../../data/job-offer/queries/useFindJobOffers';
+import { useState } from 'react';
 
 interface FiltersProps {}
 
 const Filters = (props: FiltersProps) => {
-   //this line below contains a filter resetting hook
-   const resetFilterSettings = useFilterReset();
+
+   const resetFilterSettings = useFilterReset()
+   const [maxSalary, setMaxSalary] = useState(0);
+
+   const { data } = useFindJobOffers();
+
+   data?.forEach((offer) => {
+      if (offer.salaryTo > maxSalary) setMaxSalary(offer.salaryTo);
+   });
+
+
 
    const topBlock = classNames(styles.filtersBlock, styles.topBlock);
 
@@ -56,7 +67,7 @@ const Filters = (props: FiltersProps) => {
          </div>
          <div className={sliderBlock}>
             <div className={styles.titleOfBlock}>Salary (min.)</div>
-            <Slider min={10000} max={100000} />
+            <Slider max={maxSalary} />
          </div>
       </div>
    );

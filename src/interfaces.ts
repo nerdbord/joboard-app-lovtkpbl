@@ -13,4 +13,37 @@ export interface FilterSettings {
     partRemote: boolean;
     onSite: boolean;
     salary: number;
+    [key: string]: boolean | number;
+}
+
+export interface FilterSettingsArray {
+    jobType: string[];
+    seniority: string[];
+    workLocation: string[];
+    currSalary: number;
+    minSalary: number;
+    maxSalary: number;
+}
+
+export interface groupedFilters{
+    jobType: {
+        fullTime: boolean;
+        partTime: boolean;
+        contract: boolean;
+        freelance: boolean;
+    };
+    seniority: {
+        lead: boolean;
+        expert: boolean;
+        senior: boolean;
+        midRegular: boolean;
+        junior: boolean;
+        intern: boolean;
+    };
+    location: {
+       remote: boolean;
+       partRemote: boolean;
+       onSite: boolean;
+    };
+    salary: number;
 }

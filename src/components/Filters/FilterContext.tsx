@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from 'react';
 import { FilterSettings } from '../../interfaces';
 import { FilterTypes } from '../../enums';
+import useFindJobOffers from '../../data/job-offer/queries/useFindJobOffers';
 
 export const initialFilterSettings: FilterSettings = {
    fullTime: true,
@@ -16,7 +17,7 @@ export const initialFilterSettings: FilterSettings = {
    remote: true,
    partRemote: true,
    onSite: true,
-   salary: 10000,
+   salary: 0,
 };
 
 const FilterContext = createContext<FilterSettings>(initialFilterSettings);
@@ -51,7 +52,6 @@ export function FiltersProvider({ children }: { children: React.ReactNode }) {
          }));
       }
    }
-   //filters are being cleared below this line
    function resetSettings() {
       setFilterSettings(initialFilterSettings);
    }

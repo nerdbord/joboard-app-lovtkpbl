@@ -1,33 +1,23 @@
 import { FilterTypes } from '../enums';
 
-export function getFilterText(option: FilterTypes | string) {
+export function getFilterGroup(option: FilterTypes|string) {
    switch (option) {
       case FilterTypes.fullTime:
-         return 'Full-time';
       case FilterTypes.partTime:
-         return 'Part-time';
       case FilterTypes.contract:
-         return 'Contract';
       case FilterTypes.freelance:
-         return 'Freelance';
+         return 'jobType';
       case FilterTypes.lead:
-         return 'Lead';
       case FilterTypes.expert:
-         return 'Expert';
       case FilterTypes.senior:
-         return 'Senior';
       case FilterTypes.midRegular:
-         return 'Mid/Regular';
       case FilterTypes.junior:
-         return 'Junior';
       case FilterTypes.intern:
-         return 'Intern';
+         return 'seniority';
       case FilterTypes.remote:
-         return 'Remote';
       case FilterTypes.partRemote:
-         return 'Part-remote';
       case FilterTypes.onSite:
-         return 'On-site';
+         return 'workLocation';
       case FilterTypes.salary:
          return 'salary';
       default:
