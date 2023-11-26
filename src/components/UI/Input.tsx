@@ -26,7 +26,31 @@ const Input: React.FC<InputProps> = (props) => {
       setDataArray(filteredData);
    };
 
-   console.log(dataArray);
+   const renderHighlightedTitle = (title: string): React.ReactNode => {
+      const trimmedInput = inputValue.trim();
+      if (!trimmedInput) {
+         return title;
+      }
+
+      const inputRegex = new RegExp(`(${trimmedInput})`, 'ig');
+      const titleParts = title.split(inputRegex);
+
+      return (
+         <div className={styles.titleStyle}>
+            {titleParts.map((part, index) => (
+               <div key={index}>
+                  {inputRegex.test(part) ? (
+                     <div className={styles.titleStyleStrong}>{part}</div>
+                  ) : part[0] == ' ' ? (
+                     '\u00A0' + part.slice(1)
+                  ) : (
+                     part
+                  )}
+               </div>
+            ))}
+         </div>
+      );
+   };
 
    return (
       <div className={styles.wrapper}>
@@ -43,10 +67,15 @@ const Input: React.FC<InputProps> = (props) => {
          ) : (
             <LocationIcon className={styles.icon} />
          )}
-         {inputValue.length > 0 &&
+         {inputValue &&
+            inputValue != ' ' &&
             dataArray.map((offer, offerIndex) => (
-               <div className={styles.searchResult} style={{ top: `${offerIndex*50+52}px` }}>
-                  <div className={styles.titleStyle}>{offer.title}</div>
+               <div
+                  className={styles.searchResult}
+                  style={{ top: `${offerIndex * 50 + 52}px` }}
+                  key={offerIndex}
+               >
+                  {renderHighlightedTitle(offer.title)}
                   <div className={styles.companyStyle}>{offer.companyName}</div>
                </div>
             ))}
