@@ -6,7 +6,6 @@ import LocationIcon from '../icons/LocationIcon';
 import SearchIcon from '../icons/SearchIcon';
 import { JobData } from '../../types';
 import { useState } from 'react';
-import Checkbox from './Checkbox';
 
 interface InputProps {
    placeholder?: string;
@@ -33,7 +32,8 @@ const Input: React.FC<InputProps> = (props) => {
       }
 
       const inputRegex = new RegExp(`(${trimmedInput})`, 'ig');
-      const titleParts = title.split(inputRegex);
+      //leading/trailing whitespaces apparently are lost in basic HTML, so we have to replace them with a different character
+      const titleParts = title.replaceAll(" ", '\u00A0').split(inputRegex);
 
       return (
          <div className={styles.titleStyle}>
@@ -41,8 +41,6 @@ const Input: React.FC<InputProps> = (props) => {
                <div key={index}>
                   {inputRegex.test(part) ? (
                      <div className={styles.titleStyleStrong}>{part}</div>
-                  ) : part[0] == ' ' ? (
-                     '\u00A0' + part.slice(1)
                   ) : (
                      part
                   )}
