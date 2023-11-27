@@ -23,4 +23,6 @@ export enum FilterTypes {
    partRemote = 'partRemote',
    onSite = 'onSite',
    salary = 'salary',
+   nameString = 'nameString',
+   locationString = 'locationString'
 }

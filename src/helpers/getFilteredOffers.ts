@@ -6,6 +6,8 @@ import { getFilterText } from './getFilterText';
 
 export function getFilteredOffers(offers: JobData[] | undefined, filterSettings: FilterSettings) {
    const filteredOffers = offers?.filter((offer) => {
+      const nameRegex = new RegExp(filterSettings.nameString.trim(), 'i');
+      const locationRegex = new RegExp(filterSettings.locationString.trim(), 'i');
 
       let filterToggle = true;
       /**
@@ -21,6 +23,11 @@ export function getFilteredOffers(offers: JobData[] | undefined, filterSettings:
       if (filterSettings.salary! > offer.salaryTo) {
          filterToggle = false;
       }
+
+      if (!nameRegex.test(offer.title)) {
+         filterToggle = false;
+      }
+
 
       for (const filterType in filterSettings) {
          const filterTypeName = getFilterText(filterType);
