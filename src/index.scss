@@ -47,3 +47,9 @@ span {
    font-weight: 500;
    line-height: 100%; /* 12px */
 }
+
+hr {
+   margin-block: 20px;
+   border: none;
+   border-top: 1px solid var(--color-gray-light);
+}

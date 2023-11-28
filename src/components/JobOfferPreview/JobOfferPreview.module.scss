@@ -1,3 +1,4 @@
+// header
 .headerSection {
    display: flex;
    align-items: center;
@@ -32,6 +33,7 @@
    height: 80px;
 }
 
+// details
 .detailsSection {
    // color: var(--color-gray-dark);
    display: flex;
@@ -43,6 +45,7 @@
    background: var(--color-gray-lightest);
 }
 
+// description
 .descriptionBox {
    max-height: 583px;
    max-width: 631px;
@@ -69,6 +72,32 @@
    line-height: 170%;
 }
 
+// button
 .btnSection {
    padding: 16px 30px;
+}
+
+// list
+.infoList {
+   padding: 30px;
+}
+
+.infoItem {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.infoItemTitle {
+   font-size: 12px;
+   font-weight: 600;
+   line-height: 100%; /* 12px */
+}
+
+.infoItemValue {
+   color: var(--color-gray-dark);
+
+   font-size: 14px;
+   font-weight: 400;
+   line-height: 130%; /* 18.2px */
 }

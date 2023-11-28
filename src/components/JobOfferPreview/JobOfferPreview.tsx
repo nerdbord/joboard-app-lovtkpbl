@@ -92,6 +92,19 @@ const JobOfferPreview = (props: JobOfferPreviewProps) => {
                      Visit offer ➔
                   </Button>
                </section>
+               <section>
+                  <ul className={classNames(styles.sectionBg, styles.infoList)}>
+                     <li className={styles.infoItem}>
+                        <h6 className={styles.infoItemTitle}>Added</h6>
+                        <span className={styles.infoItemValue}>4 days ago</span>
+                     </li>
+                     <hr />
+                     <li className={styles.infoItem}>
+                        <h6 className={styles.infoItemTitle}>Company</h6>
+                        <span className={styles.infoItemValue}>GoPro</span>
+                     </li>
+                  </ul>
+               </section>
             </section>
          </section>
       </Modal>
