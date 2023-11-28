@@ -33,10 +33,13 @@
 }
 
 .detailsSection {
-   color: var(--color-gray-dark);
+   // color: var(--color-gray-dark);
+   display: flex;
+   justify-content: space-between;
+   align-items: flex-start;
 }
 
-.sectionBox {
+.sectionBg {
    background: var(--color-gray-lightest);
 }
 
@@ -64,4 +67,8 @@
    font-style: normal;
    font-weight: 500;
    line-height: 170%;
+}
+
+.btnSection {
+   padding: 16px 30px;
 }

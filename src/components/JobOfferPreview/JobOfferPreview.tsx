@@ -3,6 +3,8 @@ import classNames from 'classnames';
 
 // components
 import Modal from '../UI/Modal';
+import Button from '../UI/Button';
+import { ButtonType } from '../../enums';
 
 interface JobOfferPreviewProps {
    onClose: () => void;
@@ -23,7 +25,7 @@ const JobOfferPreview = (props: JobOfferPreviewProps) => {
 
          <section className={styles.detailsSection}>
             <div className={styles.descriptionBox}>
-               <section className={classNames(styles.sectionBox, styles.descriptionSection)}>
+               <section className={classNames(styles.sectionBg, styles.descriptionSection)}>
                   <h5>Transportation System Support IT Specialist (Core IT Team)</h5>
                   <article className={styles.jobDescription}>
                      Miejsce pracy: Robakowo (pow. poznański)Nasi specjaliści wspierają pracę
@@ -84,7 +86,13 @@ const JobOfferPreview = (props: JobOfferPreviewProps) => {
                   </article>
                </section>
             </div>
-            <section></section>
+            <section className={styles.infoSection}>
+               <section className={classNames(styles.sectionBg, styles.btnSection)}>
+                  <Button type={ButtonType.Primary} onClick={() => {}}>
+                     Visit offer ➔
+                  </Button>
+               </section>
+            </section>
          </section>
       </Modal>
    );
