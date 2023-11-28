@@ -28,6 +28,10 @@ export function getFilteredOffers(offers: JobData[] | undefined, filterSettings:
          filterToggle = false;
       }
 
+      if (!locationRegex.test(offer.city)) {
+         filterToggle = false;
+      }
+
 
       for (const filterType in filterSettings) {
          const filterTypeName = getFilterText(filterType);

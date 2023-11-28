@@ -53,20 +53,3 @@ const Slider = (props: SliderProps) => {
 };
 
 export default Slider;
-
-/**
- *    previous handleChange function, saved for posterity
- *    (i may be using the offset equations later, so pls don't delete)
- * 
- *    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      const currVal = parseInt(event.target.value);
-      setSliderVal(FilterTypes.salary, currVal);
-      const currPercentVal = (currVal / props.max) * 100;
-      const thumbOffset = 6; // these lines below exist due to padding used for thumb border effect
-      const minPercentVal = (thumbOffset / (event.target.clientWidth - thumbOffset)) * 100;
-      const maxPercentVal = 100 - (thumbOffset / (event.target.clientWidth - thumbOffset)) * 100;
-      const adjustedPercentVal =
-         (currPercentVal * (maxPercentVal - minPercentVal)) / 100 + minPercentVal;
-      setpercentVal(adjustedPercentVal);
-   };
- */

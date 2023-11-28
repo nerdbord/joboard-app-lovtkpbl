@@ -1,5 +1,5 @@
 import styles from './Input.module.scss';
-import { FilterTypes, IconType } from '../../enums';
+import { FilterTypes, InputType } from '../../enums';
 
 // components
 import LocationIcon from '../icons/LocationIcon';
@@ -10,32 +10,40 @@ import { useFilter, useFilterUpdate } from '../Filters/FilterContext';
 
 interface InputProps {
    placeholder?: string;
-   icon: IconType;
+   type: InputType;
    offers: JobData[];
 }
 
 const Input: React.FC<InputProps> = (props) => {
-   const inputValue = useFilter().nameString
-   const updateFilter = useFilterUpdate()
+   const filterSettings = useFilter();
+   const inputValue =
+      props.type === InputType.Search ? filterSettings.nameString : filterSettings.locationString;
+   const updateFilter = useFilterUpdate();
    const [dataArray, setDataArray] = useState<JobData[]>(props.offers);
    const [isFocused, setIsFocused] = useState(false);
 
    const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setIsFocused(true)
       /**
-       *    Curious behaviour is happening here. After clicking the desired search tooltip
+       *    Curious behaviour is happening here. After clicking the desired search autocomplete
        *    the input value changes properly but the inputRegex value stays as it was,
-       *    prompting the user their last search in the input if they click on it again.
-       * 
+       *    prompting the user their last search in the input if they focus on it again.
+       *
        *    I think this behaviour should be kept.
        */
       const eventValue = event.target.value;
-      updateFilter(FilterTypes.nameString, eventValue);
+      updateFilter(props.type === InputType.Search ? FilterTypes.nameString : FilterTypes.locationString, eventValue);
       const inputRegex = new RegExp(eventValue.trim(), 'i');
 
       const filteredData = props.offers.filter((offer) => inputRegex.test(offer.title));
       setDataArray(filteredData);
    };
 
+   const handleKeyPress = (event: React.KeyboardEventHandler<HTMLInputElement> | undefined) => {
+      if (event?.key === 'Enter' || event?.key === 'Escape') {
+         setIsFocused(false);
+      }
+   };
 
    //this function creates the highlight effect on the job title string
    const renderHighlightedTitle = (title: string): React.ReactNode => {
@@ -65,15 +73,15 @@ const Input: React.FC<InputProps> = (props) => {
 
    function handleClick(jobTitle: string) {
       updateFilter(FilterTypes.nameString, jobTitle);
-      setIsFocused(false)
+      setIsFocused(false);
    }
 
    function handleMouseEnter(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-      event.target.style.backgroundColor = "var(--color-gray-lightest)"
+      event.target.style.backgroundColor = 'var(--color-gray-lightest)';
    }
 
    function handleMouseLeave(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-      event.target.style.backgroundColor = "var(--color-white)"
+      event.target.style.backgroundColor = 'var(--color-white)';
    }
 
    return (
@@ -84,24 +92,25 @@ const Input: React.FC<InputProps> = (props) => {
             placeholder={props.placeholder}
             name={props.placeholder}
             onInput={handleInput}
+            onKeyDown={handleKeyPress}
             value={inputValue}
+            autoComplete="off"
             onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
          />
-         {props.icon === IconType.Search ? (
+         {props.type === InputType.Search ? (
             <SearchIcon className={styles.icon} />
          ) : (
             <LocationIcon className={styles.icon} />
          )}
          {isFocused &&
-            inputValue &&
-            inputValue != ' ' &&
+            inputValue.trim() &&
             dataArray.map((offer, offerIndex) => (
                <div
                   className={styles.searchResult}
                   style={{ top: `${offerIndex * 50 + 52}px` }}
                   key={offerIndex}
-                  onClick={() => handleClick(offer.title)}
+                  onMouseDown={() => handleClick(offer.title)}
                   onMouseEnter={(event) => handleMouseEnter(event)}
                   onMouseLeave={(event) => handleMouseLeave(event)}
                >

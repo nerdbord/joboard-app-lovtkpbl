@@ -10,14 +10,11 @@ interface JobOffersListProps {
 
 const JobOffersList = (props: JobOffersListProps) => {
    return (
-      <>
-         <p className={styles.text}>{`${props.offers.length} offers found`}</p>
-         <ul className={styles.jobList} role="list">
-            {props.offers.map((offer) => (
-               <JobOffer key={offer._id} jobData={offer} />
-            ))}
-         </ul>
-      </>
+      <ul className={styles.jobList} role="list">
+         {props.offers.map((offer) => (
+            <JobOffer key={offer._id} jobData={offer} />
+         ))}
+      </ul>
    );
 };
 
