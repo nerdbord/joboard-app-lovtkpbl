@@ -40,19 +40,20 @@
    background: var(--color-gray-lightest);
 }
 
-.descriptionSection {
-   max-width: 631px;
+.descriptionBox {
    max-height: 583px;
-   padding: 40px;
-
+   max-width: 631px;
    overflow-y: scroll;
+}
+
+.descriptionSection {
+   padding: 40px;
 }
 
 .descriptionSection h5 {
    margin-bottom: 24px;
 
    font-size: 20px;
-   font-style: normal;
    font-weight: 600;
    line-height: 130%; /* 26px */
    letter-spacing: -0.4px;

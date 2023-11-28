@@ -10,11 +10,7 @@ const Backdrop = (props: { onClose: () => void }) => {
 };
 
 const ModalOverlay = (props: PropsWithChildren) => {
-   return (
-      <div className={styles.modal}>
-         <div className={styles.content}>{props.children}</div>
-      </div>
-   );
+   return <div className={styles.modal}>{props.children}</div>;
 };
 
 const portalElement = document.getElementById('overlays') as HTMLDivElement;

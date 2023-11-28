@@ -12,12 +12,14 @@
 
 .modal {
    position: fixed;
-   top: 20vh;
-   left: 5%;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
    z-index: 30;
 
-   width: 90%;
+   width: 1094px;
 
+   margin: 0 auto;
    padding: 65px 74px 48px 60px;
    border-radius: var(--border-radius-default);
 
