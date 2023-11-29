@@ -88,7 +88,13 @@ const JobOfferPreview = (props: JobOfferPreviewProps) => {
             </div>
             <section className={styles.infoSection}>
                <section className={classNames(styles.sectionBg, styles.btnSection)}>
-                  <Button type={ButtonType.Primary} onClick={() => {}}>
+                  <Button
+                     type={ButtonType.Primary}
+                     className={styles.button}
+                     onClick={() => {
+                        window.location.href = 'https://www.nerdbord.io/';
+                     }}
+                  >
                      Visit offer ➔
                   </Button>
                </section>
@@ -102,6 +108,7 @@ const JobOfferPreview = (props: JobOfferPreviewProps) => {
                      <h6 className={styles.infoItemTitle}>Company</h6>
                      <span className={styles.infoItemValue}>GoPro</span>
                   </li>
+                  <hr />
                   <li className={styles.infoItem}>
                      <h6 className={styles.infoItemTitle}>Seniority</h6>
                      <span className={styles.infoItemValue}>Senior</span>
@@ -109,7 +116,10 @@ const JobOfferPreview = (props: JobOfferPreviewProps) => {
                   <hr />
                   <li className={styles.infoItem}>
                      <h6 className={styles.infoItemTitle}>Location</h6>
-                     <span className={styles.infoItemValue}>Barcelona, Spain</span>
+                     <div>
+                        <p className={styles.infoItemValue}>Barcelona,</p>
+                        <p className={styles.infoItemValue}>Spain</p>
+                     </div>
                   </li>
                   <hr />
                   <li className={styles.infoItem}>

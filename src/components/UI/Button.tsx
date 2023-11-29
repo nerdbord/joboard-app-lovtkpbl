@@ -6,11 +6,13 @@ import { ButtonType } from '../../enums';
 interface ButtonProps {
    type: ButtonType;
    children: React.ReactNode;
+   className?: string;
    onClick: () => void;
 }
 
 const Button = (props: ButtonProps) => {
    const buttonStyle = classNames(
+      props.className ? props.className : '',
       styles.buttonStyle,
       props.type == ButtonType.Primary ? styles.buttonPrimary : styles.buttonText,
    );

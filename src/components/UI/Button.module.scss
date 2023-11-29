@@ -8,15 +8,18 @@
    padding: 10px 25px 10px 25px;
    border-radius: 30px;
    gap: 10px;
+
+   transition: background-color 0.2s;
+   cursor: pointer;
 }
 
 .buttonPrimary {
    color: var(--color-white);
-   background-color: var(--color-accent);
+   background-color: var(--color-accent-strong);
 }
 
 .buttonPrimary:hover {
-   background-color: var(--color-accent-strong);
+   background-color: var(--color-accent);
 }
 
 .buttonText {
