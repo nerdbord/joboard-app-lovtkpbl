@@ -35,10 +35,12 @@
 
 // details
 .detailsSection {
-   // color: var(--color-gray-dark);
    display: flex;
    justify-content: space-between;
-   align-items: flex-start;
+   align-items: stretch;
+   gap: 18px;
+   width: 100%;
+   height: 100%;
 }
 
 .sectionBg {
@@ -72,9 +74,14 @@
    line-height: 170%;
 }
 
+.infoSection {
+   width: 100%;
+}
+
 // button
 .btnSection {
    padding: 16px 30px;
+   margin-bottom: 18px;
 }
 
 // list
