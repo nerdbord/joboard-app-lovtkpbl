@@ -17,11 +17,15 @@ export const initialFilterSettings: FilterSettings = {
    remote: true,
    partRemote: true,
    onSite: true,
+   nameString: '',
+   locationString: '',
    salary: 0,
 };
 
 const FilterContext = createContext<FilterSettings>(initialFilterSettings);
-const FilterUpdateContext = createContext((option: FilterTypes, value?: number | undefined) => {});
+const FilterUpdateContext = createContext(
+   (option: FilterTypes, value?: number | string | undefined) => {},
+);
 const FilterResetContext = createContext(() => {});
 
 export function useFilter() {
@@ -39,26 +43,37 @@ export function useFilterReset() {
 export function FiltersProvider({ children }: { children: React.ReactNode }) {
    const [filterSettings, setFilterSettings] = useState<FilterSettings>(initialFilterSettings);
 
-   function updateSettings(option: FilterTypes, value?: number) {
-      if (value && option === FilterTypes.salary) {
-         setFilterSettings((prevState) => ({
-            ...prevState,
-            [option]: value,
-         }));
-      } else {
-         setFilterSettings((prevState) => ({
-            ...prevState,
-            [option]: !prevState[option],
-         }));
-      }
+   function updateFilterSettings(
+      field: FilterTypes,
+      value?: number | string | boolean | undefined,
+   ) {
+      setFilterSettings((prevState: FilterSettings) => {
+         if (value === undefined && typeof prevState[field] === 'boolean') {
+            // Toggle boolean values
+            return { ...prevState, [field]: !prevState[field] };
+         } else if (field === FilterTypes.salary && typeof value === 'number') {
+            // Update salary if the field is salary and the value is a number
+            return { ...prevState, salary: value };
+         } else if (
+            (field === FilterTypes.nameString || field === FilterTypes.locationString) &&
+            typeof value === 'string'
+         ) {
+            // Update nameString or locationString if the field is one of them and the value is a string
+            return { ...prevState, [field]: value };
+         } else {
+            // Do nothing if none of the conditions are met
+            return prevState;
+         }
+      });
    }
+
    function resetSettings() {
       setFilterSettings(initialFilterSettings);
    }
 
    return (
       <FilterContext.Provider value={filterSettings}>
-         <FilterUpdateContext.Provider value={updateSettings}>
+         <FilterUpdateContext.Provider value={updateFilterSettings}>
             <FilterResetContext.Provider value={resetSettings}>
                {children}
             </FilterResetContext.Provider>

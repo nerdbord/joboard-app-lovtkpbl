@@ -1,4 +1,4 @@
-export enum IconType {
+export enum InputType {
    Search = 'search',
    Location = 'location',
 }
@@ -23,4 +23,6 @@ export enum FilterTypes {
    partRemote = 'partRemote',
    onSite = 'onSite',
    salary = 'salary',
+   nameString = 'nameString',
+   locationString = 'locationString'
 }
