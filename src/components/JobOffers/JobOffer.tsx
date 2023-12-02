@@ -34,7 +34,9 @@ const JobOffer = (props: JobOfferProps) => {
    };
    return (
       <>
-         {JobOfferPreviewIsShown && <JobOfferPreview onClose={hideJobOfferPreviewHandler} />}
+         {JobOfferPreviewIsShown && (
+            <JobOfferPreview offerId={props.jobData._id} onClose={hideJobOfferPreviewHandler} />
+         )}
 
          <li className={styles.jobItem} onClick={showJobOfferPreviewHandler}>
             <div className={styles.jobContent}>

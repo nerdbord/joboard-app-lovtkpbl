@@ -49,13 +49,15 @@
 
 // description
 .descriptionBox {
-   max-height: 583px;
+   // max-height: 583px;
+   max-height: 533.5px;
    max-width: 631px;
-   overflow-y: scroll;
+   overflow-y: auto;
 }
 
 .descriptionSection {
    padding: 40px;
+   height: 100%;
 }
 
 .descriptionSection h5 {
