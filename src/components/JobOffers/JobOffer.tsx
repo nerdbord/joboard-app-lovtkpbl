@@ -7,6 +7,7 @@ import { formatTimeDifference } from '../../helpers/formatTimeDifference';
 
 // components
 import JobOfferPreview from '../JobOfferPreview/JobOfferPreview';
+import classNames from 'classnames';
 
 interface JobOfferProps {
    jobData: JobData;
@@ -46,7 +47,9 @@ const JobOffer = (props: JobOfferProps) => {
                <div>
                   <h3 className={styles.jobTitle}>{props.jobData.title}</h3>
                   <div className={styles.jobDetails}>
-                     <span className={styles.jobDetail}>{props.jobData.companyName}</span>
+                     <span className={classNames(styles.jobDetail, styles.darkColor)}>
+                        {props.jobData.companyName}
+                     </span>
                      <span
                         className={styles.jobDetail}
                      >{`${props.jobData.city}, ${props.jobData.country}`}</span>
