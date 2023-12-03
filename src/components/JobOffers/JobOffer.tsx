@@ -8,12 +8,14 @@ import { formatTimeDifference } from '../../helpers/formatTimeDifference';
 // components
 import JobOfferPreview from '../JobOfferPreview/JobOfferPreview';
 import classNames from 'classnames';
+import useIsSmallScreen from '../../hooks/useSmallScreen';
 
 interface JobOfferProps {
    jobData: JobData;
 }
 
 const JobOffer = (props: JobOfferProps) => {
+   const isSmallScreen = useIsSmallScreen(768); // this should be changed with breakpoint in css
    const [JobOfferPreviewIsShown, setJobOfferPreviewIsShown] = useState(false);
 
    const salaryFromFormatted = props.jobData.salaryFrom
@@ -39,30 +41,63 @@ const JobOffer = (props: JobOfferProps) => {
             <JobOfferPreview offerId={props.jobData._id} onClose={hideJobOfferPreviewHandler} />
          )}
 
-         <li className={styles.jobItem} onClick={showJobOfferPreviewHandler}>
-            <div className={styles.jobContent}>
-               <div className={styles.imageContainer}>
-                  <img src={props.jobData.image} alt={props.jobData.companyName} />
-               </div>
-               <div>
-                  <h3 className={styles.jobTitle}>{props.jobData.title}</h3>
-                  <div className={styles.jobDetails}>
-                     <span className={classNames(styles.jobDetail, styles.darkColor)}>
-                        {props.jobData.companyName}
-                     </span>
-                     <span
-                        className={styles.jobDetail}
-                     >{`${props.jobData.city}, ${props.jobData.country}`}</span>
-                     <span className={styles.jobDetail}>{props.jobData.workLocation}</span>
-                     <span className={styles.jobDetail}>{props.jobData.seniority}</span>
-                     <span className={`${styles.jobDetail} ${styles.jobSalary}`}>
-                        {`${salaryFromFormatted} - ${salaryToFormatted} ${props.jobData.currency} net`}
-                     </span>
+         {!isSmallScreen && (
+            <li className={styles.jobItem} onClick={showJobOfferPreviewHandler}>
+               <div className={styles.jobContent}>
+                  <div className={styles.imageContainer}>
+                     <img src={props.jobData.image} alt={props.jobData.companyName} />
+                  </div>
+                  <div>
+                     <h3 className={styles.jobTitle}>{props.jobData.title}</h3>
+                     <div className={styles.jobDetails}>
+                        <span className={classNames(styles.jobDetail, styles.darkColor)}>
+                           {props.jobData.companyName}
+                        </span>
+                        <span
+                           className={styles.jobDetail}
+                        >{`${props.jobData.city}, ${props.jobData.country}`}</span>
+                        <span className={styles.jobDetail}>{props.jobData.workLocation}</span>
+                        <span className={styles.jobDetail}>{props.jobData.seniority}</span>
+                        <span className={`${styles.jobDetail} ${styles.jobSalary}`}>
+                           {`${salaryFromFormatted} - ${salaryToFormatted} ${props.jobData.currency} net`}
+                        </span>
+                     </div>
                   </div>
                </div>
-            </div>
-            <span>{createdAtFormatted}</span>
-         </li>
+               <span className={styles.alignRight}>{createdAtFormatted}</span>
+            </li>
+         )}
+
+         {isSmallScreen && (
+            <li className={styles.jobItem}>
+               <h3 className={styles.jobTitle}>{props.jobData.title}</h3>
+               <div className={styles.jobContent}>
+                  <div className={styles.imageContainer}>
+                     <img src={props.jobData.image} alt={props.jobData.companyName} />
+                  </div>
+                  <div className={styles.jobDetails}>
+                     <div className={styles.jobDetailsMobile}>
+                        <span className={classNames(styles.jobDetail, styles.darkColor)}>
+                           {props.jobData.companyName}
+                        </span>
+                        <span
+                           className={styles.jobDetail}
+                        >{`${props.jobData.city}, ${props.jobData.country}`}</span>
+                     </div>
+                     <div className={styles.jobDetailsMobile}>
+                        <span className={styles.jobDetail}>{props.jobData.seniority}</span>
+                        <span className={styles.jobDetail}>{props.jobData.workLocation}</span>
+                     </div>
+                  </div>
+               </div>
+               <div className={styles.bottomWrapperMobile}>
+                  <span className={styles.jobSalary}>
+                     {`${salaryFromFormatted} - ${salaryToFormatted} ${props.jobData.currency} net`}
+                  </span>
+                  <span className={styles.alignRight}>{createdAtFormatted}</span>
+               </div>
+            </li>
+         )}
       </>
    );
 };
