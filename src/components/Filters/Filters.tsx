@@ -48,8 +48,9 @@ const Filters = (props: FiltersProps) => {
       filterUpdate(option)
    }
 
-   const handleSliderChange = () => {
-
+   const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const currVal = parseInt(event.target.value);
+      filterUpdate(FilterTypes.salary, currVal);
    }
 
    return (
@@ -86,7 +87,7 @@ const Filters = (props: FiltersProps) => {
          </div>
          <div className={sliderBlock}>
             <div className={styles.titleOfBlock}>Salary (min.)</div>
-            <Slider max={maxSalary} />
+            <Slider max={maxSalary} sliderVal={filterSettings.salary} sliderOnChange={handleSliderChange} />
          </div>
       </div>
    );

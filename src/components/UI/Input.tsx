@@ -93,7 +93,6 @@ const Input: React.FC<InputProps> = (props) => {
             placeholder={props.placeholder}
             name={props.placeholder}
             onInput={handleInput}
-            onKeyDown={handleKeyPress}
             value={inputValue}
             autoComplete="off"
             onFocus={() => setIsFocused(true)}
