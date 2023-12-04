@@ -50,17 +50,29 @@ const JobOffer = (props: JobOfferProps) => {
                   <div>
                      <h3 className={styles.jobTitle}>{props.jobData.title}</h3>
                      <div className={styles.jobDetails}>
-                        <span className={classNames(styles.jobDetail, styles.darkColor)}>
-                           {props.jobData.companyName}
-                        </span>
-                        <span
-                           className={styles.jobDetail}
-                        >{`${props.jobData.city}, ${props.jobData.country}`}</span>
-                        <span className={styles.jobDetail}>{props.jobData.workLocation}</span>
-                        <span className={styles.jobDetail}>{props.jobData.seniority}</span>
-                        <span className={`${styles.jobDetail} ${styles.jobSalary}`}>
-                           {`${salaryFromFormatted} - ${salaryToFormatted} ${props.jobData.currency} net`}
-                        </span>
+                        <div className={styles.topDetails}>
+                           <span
+                              className={classNames(
+                                 styles.jobDetail,
+                                 styles.jobDetailFirst,
+                                 styles.darkColor,
+                              )}
+                           >
+                              {props.jobData.companyName}
+                           </span>
+                           <span
+                              className={styles.jobDetail}
+                           >{`${props.jobData.city}, ${props.jobData.country}`}</span>
+                        </div>
+                        <div className={styles.middleDetails}>
+                           <span className={styles.jobDetail}>{props.jobData.workLocation}</span>
+                           <span className={styles.jobDetail}>{props.jobData.seniority}</span>
+                        </div>
+                        <div className={styles.bottomDetails}>
+                           <span className={`${styles.jobDetail} ${styles.jobSalary}`}>
+                              {`${salaryFromFormatted} - ${salaryToFormatted} ${props.jobData.currency} net`}
+                           </span>
+                        </div>
                      </div>
                   </div>
                </div>

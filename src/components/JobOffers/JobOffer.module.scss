@@ -1,5 +1,6 @@
 .alignRight {
    text-align: right;
+   text-wrap: nowrap;
 }
 
 .darkColor {
@@ -14,6 +15,7 @@
    display: flex;
    justify-content: space-between;
    align-items: flex-start;
+   gap: 16px;
 
    padding: 22.75px;
 
@@ -45,10 +47,17 @@
 }
 
 .jobDetails {
+   display: flex;
+}
+
+.topDetails,
+.middleDetails,
+.bottomDetails {
    text-wrap: nowrap;
    margin-top: 8px;
    display: flex;
 }
+
 .jobDetail {
    display: block;
    padding-inline: 14px;
@@ -56,15 +65,57 @@
    border-right: 1px solid var(--color-gray-light);
 }
 
-.jobDetail:last-child {
-   border: none;
-}
-.jobDetail:first-child {
+.jobDetailFirst {
    padding-left: 0;
 }
 
 .jobSalary {
+   border: none;
    color: var(--color-accent);
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1186px) {
+   .jobDetails {
+      flex-direction: column;
+   }
+
+   .jobDetail:first-child {
+      padding-left: 0;
+   }
+
+   .jobDetail:last-child {
+      border: none;
+   }
+
+   .topDetails {
+      margin-top: 8px;
+   }
+
+   .middleDetails,
+   .bottomDetails {
+      margin-top: 4px;
+   }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 841px) {
+   .jobItem {
+      gap: 0;
+   }
+
+   .jobTitle {
+      margin-right: 16px;
+   }
+
+   .topDetails,
+   .middleDetails {
+      gap: 4px;
+      flex-direction: column;
+   }
+
+   .jobDetail {
+      padding-left: 0;
+      border: none;
+   }
 }
 
 @media only screen and (max-width: 768px) {
