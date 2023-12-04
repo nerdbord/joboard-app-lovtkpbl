@@ -6,7 +6,7 @@ import LocationIcon from '../icons/LocationIcon';
 import SearchIcon from '../icons/SearchIcon';
 import { JobData } from '../../types';
 import { useState } from 'react';
-import { useFilter, useFilterUpdate } from '../Filters/FilterContext';
+import { useFilter, useFilterUpdate } from '../../providers/Filters/FilterContext';
 
 interface InputProps {
    placeholder?: string;
@@ -39,6 +39,7 @@ const Input: React.FC<InputProps> = (props) => {
       setDataArray(filteredData);
    };
 
+   //this is the function where we'd add arrow control for the tooltip, but that's not a part of task at hand
    const handleKeyPress = (event: React.KeyboardEventHandler<HTMLInputElement> | undefined) => {
       if (event?.key === 'Enter' || event?.key === 'Escape') {
          setIsFocused(false);

@@ -3,7 +3,7 @@ import styles from './App.module.scss';
 import Container from './components/Container/Container';
 import Filters from './components/Filters/Filters';
 import JobOffersScreen from './components/JobOffers/JobOffersScreen';
-import { FiltersProvider } from './components/Filters/FilterContext';
+import { FiltersProvider } from './providers/Filters/FilterContext';
 
 const App = () => {
    return (

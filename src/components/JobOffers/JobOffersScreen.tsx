@@ -6,7 +6,7 @@ import useFindJobOffers from '../../data/job-offer/queries/useFindJobOffers';
 import JobOffersList from './JobOffersList';
 import Input from '../UI/Input';
 import Loader from '../UI/Loader';
-import { useFilter } from '../Filters/FilterContext';
+import { useFilter } from '../../providers/Filters/FilterContext';
 
 interface JobOffersProps {}
 
@@ -23,9 +23,9 @@ const JobOffersScreen = (props: JobOffersProps) => {
             </form>
          </section>
          <section className={styles.text}>
-            {`${data?.length ? data?.length : '0'} offers found`}
-            {filterSettings.nameString.trim() && ` for "${filterSettings.nameString}"`}
-            {filterSettings.locationString.trim() && ` in "${filterSettings.locationString}"`}
+            {data && `${data?.length ? data?.length : '0'} offer${data?.length == 1 ? "" : "s"} found`}
+            {filterSettings.nameString.trim() && ` for "${filterSettings.nameString.trim()}"`}
+            {filterSettings.locationString.trim() && ` in "${filterSettings.locationString.trim()}"`}
          </section>
          <section>
             {isPending ? (

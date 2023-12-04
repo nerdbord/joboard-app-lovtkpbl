@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { JobData } from '../../../types';
-import { useFilter } from '../../../components/Filters/FilterContext';
+import { useFilter } from '../../../providers/Filters/FilterContext';
 import { getFilteredOffers } from '../../../helpers/getFilteredOffers';
 
 const useFindJobOffers = () => {

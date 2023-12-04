@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './Slider.module.scss';
-import { useFilter, useFilterUpdate } from '../Filters/FilterContext';
+import { useFilter, useFilterUpdate } from '../../providers/Filters/FilterContext';
 import { FilterTypes } from '../../enums';
 
 interface SliderProps {
