@@ -81,7 +81,7 @@ const JobOffer = (props: JobOfferProps) => {
          )}
 
          {isSmallScreen && (
-            <li className={styles.jobItem}>
+            <li className={styles.jobItem} onClick={showJobOfferPreviewHandler}>
                <h3 className={styles.jobTitle}>{props.jobData.title}</h3>
                <div className={styles.jobContent}>
                   <div className={styles.imageContainer}>
