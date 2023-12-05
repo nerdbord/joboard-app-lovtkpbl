@@ -1,5 +1,6 @@
 .mainScreen {
    display: flex;
+   justify-content: center;
 }
 
 .filtersSection {
@@ -23,6 +24,9 @@
 
    .filtersSection {
       margin: 16px;
+
+      display: flex;
+      justify-content: space-between;
    }
 
    .filtersSection h1 {

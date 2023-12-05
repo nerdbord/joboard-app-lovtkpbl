@@ -1,6 +1,7 @@
 .filtersTopWrap {
    border: 1px solid var(--color-gray-light);
    border-radius: 5px;
+   margin: 0 auto;
    padding: 24px;
    min-width: 225px;
    width: fit-content;
@@ -48,8 +49,8 @@
    grid-template-columns: 1fr 1fr;
 }
 
-@media only screen and (max-width: 768px) {
-   .filtersTopWrap {
-      display: none;
-   }
-}
+// @media only screen and (max-width: 768px) {
+//    .filtersTopWrap {
+//       display: none;
+//    }
+// }

@@ -6,6 +6,7 @@ export enum InputType {
 export enum ButtonType {
    Primary = 'primary',
    Text = 'text',
+   Filters = 'filters',
 }
 
 export enum FilterTypes {
@@ -24,5 +25,5 @@ export enum FilterTypes {
    onSite = 'onSite',
    salary = 'salary',
    nameString = 'nameString',
-   locationString = 'locationString'
+   locationString = 'locationString',
 }
