@@ -30,3 +30,9 @@
 .uncheckedText {
    color: var(--color-gray-dark);
 }
+
+@media only screen and (max-width: 768px) {
+   .checkboxTopWrap {
+      height: 36px;
+   }
+}
