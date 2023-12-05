@@ -7,6 +7,7 @@ export enum ButtonType {
    Primary = 'primary',
    Text = 'text',
    Filters = 'filters',
+   FiltersActive = 'filtersActive',
 }
 
 export enum FilterTypes {
