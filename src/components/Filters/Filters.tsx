@@ -38,6 +38,7 @@ const Filters = (props: FiltersProps) => {
       FilterTypes.junior,
       FilterTypes.intern,
    ];
+   //hey Nerdy, location based checkbox filtering is in this file!
    const locationArray = [FilterTypes.remote, FilterTypes.partRemote, FilterTypes.onSite];
 
    const topBlock = classNames(styles.filtersBlock, styles.topBlock);

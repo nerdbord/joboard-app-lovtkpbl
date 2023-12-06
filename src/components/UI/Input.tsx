@@ -1,43 +1,27 @@
 import styles from './Input.module.scss';
-import { FilterTypes, InputType } from '../../enums';
+import { InputType } from '../../enums';
 
 // components
 import LocationIcon from '../icons/LocationIcon';
 import SearchIcon from '../icons/SearchIcon';
 import { JobData } from '../../types';
 import { useState } from 'react';
-import { useFilter, useFilterUpdate } from '../../providers/Filters/FilterContext';
+import { FilterSettings } from '../../interfaces';
 
 interface InputProps {
    placeholder?: string;
-   type: InputType;
+   inputType: InputType;
    offers: JobData[];
+   filterSettings: FilterSettings;
+   handleInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Input: React.FC<InputProps> = (props) => {
-   const filterSettings = useFilter();
+   const filterSettings = props.filterSettings;
    const inputValue =
-      props.type === InputType.Search ? filterSettings.nameString : filterSettings.locationString;
-   const updateFilter = useFilterUpdate();
-   const [dataArray, setDataArray] = useState<JobData[]>(props.offers);
+      props.inputType === InputType.Search ? filterSettings.nameString : filterSettings.locationString;
+
    const [isFocused, setIsFocused] = useState(false);
-
-   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setIsFocused(true)
-      /**
-       *    Curious behaviour is happening here. After clicking the desired search autocomplete
-       *    the input value changes properly but the inputRegex value stays as it was,
-       *    prompting the user their last search in the input if they focus on it again.
-       *
-       *    I think this behaviour should be kept.
-       */
-      const eventValue = event.target.value;
-      updateFilter(props.type === InputType.Search ? FilterTypes.nameString : FilterTypes.locationString, eventValue);
-      const inputRegex = new RegExp(eventValue.trim(), 'i');
-
-      const filteredData = props.offers.filter((offer) => inputRegex.test(offer.title));
-      setDataArray(filteredData);
-   };
 
    //this is the function where we'd add arrow control for the tooltip, but that's not a part of task at hand
    const handleKeyPress = (event: React.KeyboardEventHandler<HTMLInputElement> | undefined) => {
@@ -73,7 +57,6 @@ const Input: React.FC<InputProps> = (props) => {
    };
 
    function handleClick(jobTitle: string) {
-      updateFilter(FilterTypes.nameString, jobTitle);
       setIsFocused(false);
    }
 
@@ -91,21 +74,21 @@ const Input: React.FC<InputProps> = (props) => {
             type="text"
             className={styles.input}
             placeholder={props.placeholder}
-            name={props.placeholder}
-            onInput={handleInput}
+            name={props.inputType}
+            onInput={props.handleInput}
             value={inputValue}
             autoComplete="off"
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
          />
-         {props.type === InputType.Search ? (
+         {props.inputType === InputType.Search ? (
             <SearchIcon className={styles.icon} />
          ) : (
             <LocationIcon className={styles.icon} />
          )}
          {isFocused &&
             inputValue.trim() &&
-            dataArray.map((offer, offerIndex) => (
+            props.offers.map((offer, offerIndex) => (
                <div
                   className={styles.searchResult}
                   style={{ top: `${offerIndex * 50 + 52}px` }}
