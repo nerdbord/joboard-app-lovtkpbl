@@ -46,13 +46,13 @@ const Filters = (props: FiltersProps) => {
    const sliderBlock = classNames(styles.filtersBlock, styles.sliderBlock);
 
    const handleCheckboxChange = (option: FilterTypes) => {
-      filterUpdate(option)
-   }
+      filterUpdate(option);
+   };
 
    const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const currVal = parseInt(event.target.value);
       filterUpdate(FilterTypes.salary, currVal);
-   }
+   };
 
    return (
       <div className={styles.filtersTopWrap}>
@@ -65,30 +65,49 @@ const Filters = (props: FiltersProps) => {
          <div className={styles.filtersBlock}>
             <div className={styles.titleOfBlock}>Job type</div>
             <div className={styles.blockGrid}>
-               {jobTypesArray.map((jobType) => (
-                  <Checkbox option={jobType} value={filterSettings[jobType] as boolean} onChange={handleCheckboxChange}/>
+               {jobTypesArray.map((jobType, index) => (
+                  <Checkbox
+                     option={jobType}
+                     key={index}
+                     value={filterSettings[jobType] as boolean}
+                     onChange={handleCheckboxChange}
+                  />
                ))}
             </div>
          </div>
          <div className={styles.filtersBlock}>
             <div className={styles.titleOfBlock}>Seniority</div>
             <div className={styles.blockGrid}>
-               {seniorityArray.map((seniority) => (
-                  <Checkbox option={seniority} value={filterSettings[seniority] as boolean} onChange={handleCheckboxChange}/>
+               {seniorityArray.map((seniority, index) => (
+                  <Checkbox
+                     option={seniority}
+                     key={index}
+                     value={filterSettings[seniority] as boolean}
+                     onChange={handleCheckboxChange}
+                  />
                ))}
             </div>
          </div>
          <div className={styles.filtersBlock}>
             <div className={styles.titleOfBlock}>Location</div>
             <div className={styles.blockGrid}>
-               {locationArray.map((location) => (
-                  <Checkbox option={location} value={filterSettings[location] as boolean} onChange={handleCheckboxChange}/>
+               {locationArray.map((location, index) => (
+                  <Checkbox
+                     option={location}
+                     key={index}
+                     value={filterSettings[location] as boolean}
+                     onChange={handleCheckboxChange}
+                  />
                ))}
             </div>
          </div>
          <div className={sliderBlock}>
             <div className={styles.titleOfBlock}>Salary (min.)</div>
-            <Slider max={maxSalary} sliderVal={filterSettings.salary} sliderOnChange={handleSliderChange} />
+            <Slider
+               max={maxSalary}
+               sliderVal={filterSettings.salary}
+               sliderOnChange={handleSliderChange}
+            />
          </div>
       </div>
    );

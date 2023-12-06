@@ -16,6 +16,16 @@
    letter-spacing: -1.89px;
 }
 
+.mainLink{
+   color: var(--color-gray-darkest);
+   text-decoration: none;
+}
+
+.mainLink:hover{
+   color: var(--color-accent-strong);
+   text-decoration: underline;
+}
+
 @media only screen and (max-width: 768px) {
    .mainScreen {
       flex-direction: column;
