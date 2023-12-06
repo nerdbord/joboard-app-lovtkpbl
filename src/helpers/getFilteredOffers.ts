@@ -28,7 +28,7 @@ export function getFilteredOffers(offers: JobData[] | undefined, filterSettings:
          filterToggle = false;
       }
 
-      if (!locationRegex.test(offer.city)) {
+      if (!locationRegex.test(`${offer.city}, ${offer.country}`)) {
          filterToggle = false;
       }
 

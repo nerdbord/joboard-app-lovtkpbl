@@ -2,8 +2,10 @@ import styles from './App.module.scss';
 // components
 import Filters from './components/Filters/Filters';
 import JobOffersScreen from './components/JobOffers/JobOffersScreen';
-import { FiltersProvider } from './components/Filters/FilterContext';
+
+import { FiltersProvider } from './providers/Filters/FilterContext';
 import Container from './components/Container/Container';
+
 
 const App = () => {
    return (
