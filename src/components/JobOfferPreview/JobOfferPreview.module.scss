@@ -1,0 +1,117 @@
+// header
+.headerSection {
+   display: flex;
+   align-items: center;
+   gap: 24px;
+
+   margin-bottom: 24px;
+}
+
+.headerText {
+   display: flex;
+   flex-direction: column;
+   gap: 16px;
+}
+
+.headerSection h4 {
+   font-size: 28px;
+   font-weight: 600;
+   line-height: 100%; /* 28px */
+}
+
+.headerSection span {
+   color: var(--color-gray-dark);
+
+   font-size: 14px;
+   font-weight: 400;
+   line-height: 130%; /* 18.2px */
+}
+
+.imageContainer {
+   width: 80px;
+   min-width: 80px;
+   height: 80px;
+}
+
+// details
+.detailsSection {
+   display: flex;
+   justify-content: space-between;
+   align-items: stretch;
+   gap: 18px;
+   width: 100%;
+   height: 100%;
+}
+
+.sectionBg {
+   background: var(--color-gray-lightest);
+}
+
+// description
+.descriptionBox {
+   // max-height: 583px;
+   max-height: 533.5px;
+   max-width: 631px;
+   overflow-y: auto;
+}
+
+.descriptionSection {
+   padding: 40px;
+   height: 100%;
+}
+
+.descriptionSection h5 {
+   margin-bottom: 24px;
+
+   font-size: 20px;
+   font-weight: 600;
+   line-height: 130%; /* 26px */
+   letter-spacing: -0.4px;
+}
+
+.jobDescription {
+   font-size: 14px;
+   font-style: normal;
+   font-weight: 500;
+   line-height: 170%;
+}
+
+.infoSection {
+   width: 100%;
+}
+
+// button
+.btnSection {
+   padding: 16px 30px;
+   margin-bottom: 18px;
+}
+
+.button {
+   width: 100%;
+}
+
+// list
+.infoList {
+   padding: 30px;
+}
+
+.infoItem {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.infoItemTitle {
+   font-size: 12px;
+   font-weight: 600;
+   line-height: 100%; /* 12px */
+}
+
+.infoItemValue {
+   color: var(--color-gray-dark);
+   text-align: right;
+
+   font-size: 14px;
+   font-weight: 400;
+   line-height: 130%; /* 18.2px */
+}

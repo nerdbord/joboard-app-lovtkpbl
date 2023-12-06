@@ -1,0 +1,38 @@
+.backdrop {
+   position: fixed;
+   top: 0;
+   left: 0;
+   z-index: 20;
+
+   width: 100%;
+   height: 100vh;
+
+   background-color: var(--color-backdrop);
+}
+
+.modal {
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   z-index: 30;
+
+   width: 1094px;
+
+   margin: 0 auto;
+   padding: 65px 74px 48px 60px;
+   border-radius: var(--border-radius-default);
+
+   background-color: var(--color-white);
+   border: 1px solid var(--color-gray-light);
+}
+
+.closeIcon {
+   position: absolute;
+   top: 0;
+   right: 0;
+
+   margin: 20px;
+
+   cursor: pointer;
+}
