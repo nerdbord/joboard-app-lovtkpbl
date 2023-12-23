@@ -13,7 +13,7 @@ const App = () => {
          <Container>
             <div className={styles.mainScreen}>
                <section className={styles.filtersSection}>
-                  <h1>👾 JO-BOARD</h1>
+                  <h1><a href="" className={styles.mainLink}>👾 JO-BOARD</a></h1>
                   <Filters />
                </section>
                <JobOffersScreen />

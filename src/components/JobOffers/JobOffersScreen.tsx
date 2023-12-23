@@ -17,8 +17,17 @@ const JobOffersScreen = (props: JobOffersProps) => {
 
    const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
       const eventValue = event.target.value;
-      const inputType = event.target.getAttribute('name') == InputType.Search ? FilterTypes.nameString : FilterTypes.locationString;
-      updateFilter(inputType, eventValue)
+      const filterType =
+         event.target.getAttribute('name') == InputType.Search
+            ? FilterTypes.nameString
+            : FilterTypes.locationString;
+      updateFilter(filterType, eventValue);
+   };
+
+   const handleClickAutocomplete = (searchString: string, inputType: InputType) => {
+      const filterType =
+         inputType == InputType.Search ? FilterTypes.nameString : FilterTypes.locationString;
+      updateFilter(filterType, searchString);
    };
 
    return (
@@ -31,6 +40,7 @@ const JobOffersScreen = (props: JobOffersProps) => {
                   placeholder="Search for"
                   offers={data || []}
                   filterSettings={filterSettings}
+                  handleClickAutocomplete={handleClickAutocomplete}
                />
                <Input
                   inputType={InputType.Location}
@@ -38,6 +48,7 @@ const JobOffersScreen = (props: JobOffersProps) => {
                   placeholder="Search location"
                   offers={data || []}
                   filterSettings={filterSettings}
+                  handleClickAutocomplete={handleClickAutocomplete}
                />
             </form>
          </section>
