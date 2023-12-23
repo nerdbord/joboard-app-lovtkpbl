@@ -5,7 +5,7 @@ import { InputType } from '../../enums';
 import LocationIcon from '../icons/LocationIcon';
 import SearchIcon from '../icons/SearchIcon';
 import { JobData } from '../../types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FilterSettings } from '../../interfaces';
 
 interface InputProps {
@@ -25,6 +25,22 @@ const Input: React.FC<InputProps> = (props) => {
          : filterSettings.locationString;
 
    const [isFocused, setIsFocused] = useState(false);
+
+   const [uniqueCities, setUniqueCities] = useState<JobData[]>(props.offers);
+
+   useEffect(() => {
+      const uniqueCities = new Set<string>();
+      setUniqueCities(
+         props.offers.filter((offer) => {
+            if (uniqueCities.has(offer.city)) {
+               return false;
+            } else {
+               uniqueCities.add(offer.city);
+               return true;
+            }
+         }),
+      );
+   }, [props.filterSettings]);
 
    //this function creates the highlight effect on the autocomplete string
    const renderHighlightedResult = (result: string): React.ReactNode => {
@@ -52,18 +68,18 @@ const Input: React.FC<InputProps> = (props) => {
       );
    };
 
-   function internalInputHandler(event: React.ChangeEvent<HTMLInputElement>) {      
+   function internalInputHandler(event: React.ChangeEvent<HTMLInputElement>) {
       props.handleInput(event);
    }
 
-   function keyPressHandler(event: React.KeyboardEvent<HTMLInputElement>){
-      if (event.key == "Enter" || event.key == "Excape") {
-         setIsFocused(false)
+   function keyPressHandler(event: React.KeyboardEvent<HTMLInputElement>) {
+      if (event.key == 'Enter' || event.key == 'Excape') {
+         setIsFocused(false);
       }
    }
 
-   function onClickHandler(event: React.MouseEvent<HTMLDivElement, MouseEvent>){
-      setIsFocused(true)
+   function onClickHandler(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+      setIsFocused(true);
    }
 
    function internalClickAutocompleteHandler(searchString: string, inputType: InputType) {
@@ -102,27 +118,31 @@ const Input: React.FC<InputProps> = (props) => {
          )}
          {isFocused &&
             inputValue.trim() &&
-            props.offers.map((offer, offerIndex) => {
-               const displayString =
-                  props.inputType === InputType.Search
-                     ? offer.title
-                     : `${offer.city}, ${offer.country}`;
-               return (
-                  <div
-                     className={styles.searchResult}
-                     style={{ top: `${offerIndex * 50 + 52}px` }}
-                     key={offerIndex}
-                     onMouseDown={() =>
-                        internalClickAutocompleteHandler(displayString, props.inputType)
-                     }
-                     onMouseEnter={handleMouseEnterAutocomplete}
-                     onMouseLeave={handleMouseLeaveAutocomplete}
-                  >
-                     {renderHighlightedResult(displayString)}
-                     <div className={styles.companyStyle}>{offer.companyName}</div>
-                  </div>
-               );
-            })}
+            (props.inputType == InputType.Search ? props.offers : uniqueCities).map(
+               (offer, offerIndex) => {
+                  const displayString =
+                     props.inputType === InputType.Search
+                        ? offer.title
+                        : `${offer.city}, ${offer.country}`;
+                  return (
+                     <div
+                        className={styles.searchResult}
+                        style={{ top: `${offerIndex * 50 + 52}px` }}
+                        key={offerIndex}
+                        onMouseDown={() =>
+                           internalClickAutocompleteHandler(displayString, props.inputType)
+                        }
+                        onMouseEnter={handleMouseEnterAutocomplete}
+                        onMouseLeave={handleMouseLeaveAutocomplete}
+                     >
+                        {renderHighlightedResult(displayString)}
+                        {props.inputType == InputType.Search && (
+                           <div className={styles.companyStyle}>{offer.companyName}</div>
+                        )}
+                     </div>
+                  );
+               },
+            )}
       </div>
    );
 };
