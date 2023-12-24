@@ -13,7 +13,8 @@ import { ButtonType } from './enums';
 // components
 import Filters from './components/Filters/Filters';
 import JobOffersScreen from './components/JobOffers/JobOffersScreen';
-import { FiltersProvider } from './components/Filters/FilterContext';
+
+import { FiltersProvider } from './providers/Filters/FilterContext';
 import Container from './components/Container/Container';
 import Button from './components/UI/Button';
 
@@ -30,7 +31,11 @@ const App = () => {
          <Container>
             <div className={styles.mainScreen}>
                <section className={styles.filtersSection}>
-                  <h1>👾 JO-BOARD</h1>
+                  <h1>
+                     <a href="" className={styles.mainLink}>
+                        👾 JO-BOARD
+                     </a>
+                  </h1>
                   {isSmallScreen ? (
                      <Button
                         type={isFiltersShown ? ButtonType.FiltersActive : ButtonType.Filters}

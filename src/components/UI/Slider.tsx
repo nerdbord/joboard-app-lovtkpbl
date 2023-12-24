@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import styles from './Slider.module.scss';
-import { useFilter, useFilterUpdate } from '../Filters/FilterContext';
+import { useFilter, useFilterUpdate } from '../../providers/Filters/FilterContext';
 import { FilterTypes } from '../../enums';
 import useIsSmallScreen from '../../hooks/useSmallScreen';
 import classNames from 'classnames';
 
 interface SliderProps {
+   sliderVal: number;
    max: number;
+   sliderOnChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Slider = (props: SliderProps) => {
@@ -44,7 +46,7 @@ const Slider = (props: SliderProps) => {
             className={thumbFollowerStyle}
             style={{ left: `${fixedPercentVal}%` }}
          >
-            {fixedDisplayVal}
+            {props.sliderVal}
          </div>
          <input
             type="range"

@@ -1,60 +1,57 @@
 import styles from './Input.module.scss';
-import { FilterTypes, InputType } from '../../enums';
+import { InputType } from '../../enums';
 
 // components
 import LocationIcon from '../icons/LocationIcon';
 import SearchIcon from '../icons/SearchIcon';
 import { JobData } from '../../types';
-import { useState } from 'react';
-import { useFilter, useFilterUpdate } from '../Filters/FilterContext';
+import { useEffect, useState } from 'react';
+import { FilterSettings } from '../../interfaces';
 
 interface InputProps {
    placeholder?: string;
-   type: InputType;
+   inputType: InputType;
    offers: JobData[];
+   filterSettings: FilterSettings;
+   handleInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
+   handleClickAutocomplete: (searchString: string, inputType: InputType) => void;
 }
 
 const Input: React.FC<InputProps> = (props) => {
-   const filterSettings = useFilter();
+   const filterSettings = props.filterSettings;
    const inputValue =
-      props.type === InputType.Search ? filterSettings.nameString : filterSettings.locationString;
-   const updateFilter = useFilterUpdate();
-   const [dataArray, setDataArray] = useState<JobData[]>(props.offers);
+      props.inputType === InputType.Search
+         ? filterSettings.nameString
+         : filterSettings.locationString;
+
    const [isFocused, setIsFocused] = useState(false);
 
-   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setIsFocused(true)
-      /**
-       *    Curious behaviour is happening here. After clicking the desired search autocomplete
-       *    the input value changes properly but the inputRegex value stays as it was,
-       *    prompting the user their last search in the input if they focus on it again.
-       *
-       *    I think this behaviour should be kept.
-       */
-      const eventValue = event.target.value;
-      updateFilter(props.type === InputType.Search ? FilterTypes.nameString : FilterTypes.locationString, eventValue);
-      const inputRegex = new RegExp(eventValue.trim(), 'i');
+   const [uniqueCities, setUniqueCities] = useState<JobData[]>(props.offers);
 
-      const filteredData = props.offers.filter((offer) => inputRegex.test(offer.title));
-      setDataArray(filteredData);
-   };
+   useEffect(() => {
+      const uniqueCities = new Set<string>();
+      setUniqueCities(
+         props.offers.filter((offer) => {
+            if (uniqueCities.has(offer.city)) {
+               return false;
+            } else {
+               uniqueCities.add(offer.city);
+               return true;
+            }
+         }),
+      );
+   }, [props.filterSettings]);
 
-   const handleKeyPress = (event: React.KeyboardEventHandler<HTMLInputElement> | undefined) => {
-      if (event?.key === 'Enter' || event?.key === 'Escape') {
-         setIsFocused(false);
-      }
-   };
-
-   //this function creates the highlight effect on the job title string
-   const renderHighlightedTitle = (title: string): React.ReactNode => {
+   //this function creates the highlight effect on the autocomplete string
+   const renderHighlightedResult = (result: string): React.ReactNode => {
       const trimmedInput = inputValue.trim();
       if (!trimmedInput) {
-         return title;
+         return result;
       }
 
       //leading/trailing whitespaces apparently are lost in basic HTML, so we have to replace them with a different character
       const inputRegex = new RegExp(`(${trimmedInput.replaceAll(' ', '\u00A0')})`, 'ig');
-      const titleParts = title.replaceAll(' ', '\u00A0').split(inputRegex);
+      const titleParts = result.replaceAll(' ', '\u00A0').split(inputRegex);
 
       return (
          <div className={styles.titleStyle}>
@@ -71,17 +68,32 @@ const Input: React.FC<InputProps> = (props) => {
       );
    };
 
-   function handleClick(jobTitle: string) {
-      updateFilter(FilterTypes.nameString, jobTitle);
-      setIsFocused(false);
+   function internalInputHandler(event: React.ChangeEvent<HTMLInputElement>) {
+      props.handleInput(event);
    }
 
-   function handleMouseEnter(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-      event.target.style.backgroundColor = 'var(--color-gray-lightest)';
+   function keyPressHandler(event: React.KeyboardEvent<HTMLInputElement>) {
+      if (event.key == 'Enter' || event.key == 'Excape') {
+         setIsFocused(false);
+      }
    }
 
-   function handleMouseLeave(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-      event.target.style.backgroundColor = 'var(--color-white)';
+   function onClickHandler(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+      setIsFocused(true);
+   }
+
+   function internalClickAutocompleteHandler(searchString: string, inputType: InputType) {
+      props.handleClickAutocomplete(searchString, inputType);
+   }
+
+   function handleMouseEnterAutocomplete(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+      event.target instanceof HTMLElement &&
+         (event.target.style.backgroundColor = 'var(--color-gray-lightest)');
+   }
+
+   function handleMouseLeaveAutocomplete(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+      event.target instanceof HTMLElement &&
+         (event.target.style.backgroundColor = 'var(--color-white)');
    }
 
    return (
@@ -90,34 +102,47 @@ const Input: React.FC<InputProps> = (props) => {
             type="text"
             className={styles.input}
             placeholder={props.placeholder}
-            name={props.placeholder}
-            onInput={handleInput}
-            onKeyDown={handleKeyPress}
+            name={props.inputType}
+            onInput={internalInputHandler}
             value={inputValue}
             autoComplete="off"
+            onKeyDown={keyPressHandler}
+            onClick={onClickHandler}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
          />
-         {props.type === InputType.Search ? (
+         {props.inputType === InputType.Search ? (
             <SearchIcon className={styles.icon} />
          ) : (
             <LocationIcon className={styles.icon} />
          )}
          {isFocused &&
             inputValue.trim() &&
-            dataArray.map((offer, offerIndex) => (
-               <div
-                  className={styles.searchResult}
-                  style={{ top: `${offerIndex * 50 + 52}px` }}
-                  key={offerIndex}
-                  onMouseDown={() => handleClick(offer.title)}
-                  onMouseEnter={(event) => handleMouseEnter(event)}
-                  onMouseLeave={(event) => handleMouseLeave(event)}
-               >
-                  {renderHighlightedTitle(offer.title)}
-                  <div className={styles.companyStyle}>{offer.companyName}</div>
-               </div>
-            ))}
+            (props.inputType == InputType.Search ? props.offers : uniqueCities).map(
+               (offer, offerIndex) => {
+                  const displayString =
+                     props.inputType === InputType.Search
+                        ? offer.title
+                        : `${offer.city}, ${offer.country}`;
+                  return (
+                     <div
+                        className={styles.searchResult}
+                        style={{ top: `${offerIndex * 50 + 52}px` }}
+                        key={offerIndex}
+                        onMouseDown={() =>
+                           internalClickAutocompleteHandler(displayString, props.inputType)
+                        }
+                        onMouseEnter={handleMouseEnterAutocomplete}
+                        onMouseLeave={handleMouseLeaveAutocomplete}
+                     >
+                        {renderHighlightedResult(displayString)}
+                        {props.inputType == InputType.Search && (
+                           <div className={styles.companyStyle}>{offer.companyName}</div>
+                        )}
+                     </div>
+                  );
+               },
+            )}
       </div>
    );
 };

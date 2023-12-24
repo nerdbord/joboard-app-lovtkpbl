@@ -1,6 +1,6 @@
 import styles from './Filters.module.scss';
 import classNames from 'classnames';
-import { useFilter, useFilterReset } from './FilterContext';
+import { useFilter, useFilterReset, useFilterUpdate } from '../../providers/Filters/FilterContext';
 import { ButtonType, FilterTypes } from '../../enums';
 
 // components
@@ -14,8 +14,9 @@ interface FiltersProps {
 }
 
 const Filters = (props: FiltersProps) => {
-
-   const resetFilterSettings = useFilterReset()
+   const resetFilterSettings = useFilterReset();
+   const filterUpdate = useFilterUpdate();
+   const filterSettings = useFilter();
    const [maxSalary, setMaxSalary] = useState(0);
 
    const { data } = useFindJobOffers();
@@ -24,11 +25,35 @@ const Filters = (props: FiltersProps) => {
       if (offer.salaryTo > maxSalary) setMaxSalary(offer.salaryTo);
    });
 
-
+   const jobTypesArray = [
+      FilterTypes.fullTime,
+      FilterTypes.partTime,
+      FilterTypes.contract,
+      FilterTypes.freelance,
+   ];
+   const seniorityArray = [
+      FilterTypes.lead,
+      FilterTypes.expert,
+      FilterTypes.senior,
+      FilterTypes.midRegular,
+      FilterTypes.junior,
+      FilterTypes.intern,
+   ];
+   //hey Nerdy, location based checkbox filtering is in this file!
+   const locationArray = [FilterTypes.remote, FilterTypes.partRemote, FilterTypes.onSite];
 
    const topBlock = classNames(styles.filtersBlock, styles.topBlock);
 
    const sliderBlock = classNames(styles.filtersBlock, styles.sliderBlock);
+
+   const handleCheckboxChange = (option: FilterTypes) => {
+      filterUpdate(option);
+   };
+
+   const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const currVal = parseInt(event.target.value);
+      filterUpdate(FilterTypes.salary, currVal);
+   };
 
    return (
       <div className={styles.filtersTopWrap}>
@@ -41,34 +66,49 @@ const Filters = (props: FiltersProps) => {
          <div className={styles.filtersBlock}>
             <div className={styles.titleOfBlock}>Job type</div>
             <div className={styles.blockGrid}>
-               <Checkbox option={FilterTypes.fullTime} />
-               <Checkbox option={FilterTypes.partTime} />
-               <Checkbox option={FilterTypes.contract} />
-               <Checkbox option={FilterTypes.freelance} />
+               {jobTypesArray.map((jobType, index) => (
+                  <Checkbox
+                     option={jobType}
+                     key={index}
+                     value={filterSettings[jobType] as boolean}
+                     onChange={handleCheckboxChange}
+                  />
+               ))}
             </div>
          </div>
          <div className={styles.filtersBlock}>
             <div className={styles.titleOfBlock}>Seniority</div>
             <div className={styles.blockGrid}>
-               <Checkbox option={FilterTypes.lead} />
-               <Checkbox option={FilterTypes.expert} />
-               <Checkbox option={FilterTypes.senior} />
-               <Checkbox option={FilterTypes.midRegular} />
-               <Checkbox option={FilterTypes.junior} />
-               <Checkbox option={FilterTypes.intern} />
+               {seniorityArray.map((seniority, index) => (
+                  <Checkbox
+                     option={seniority}
+                     key={index}
+                     value={filterSettings[seniority] as boolean}
+                     onChange={handleCheckboxChange}
+                  />
+               ))}
             </div>
          </div>
          <div className={styles.filtersBlock}>
             <div className={styles.titleOfBlock}>Location</div>
             <div className={styles.blockGrid}>
-               <Checkbox option={FilterTypes.remote} />
-               <Checkbox option={FilterTypes.partRemote} />
-               <Checkbox option={FilterTypes.onSite} />
+               {locationArray.map((location, index) => (
+                  <Checkbox
+                     option={location}
+                     key={index}
+                     value={filterSettings[location] as boolean}
+                     onChange={handleCheckboxChange}
+                  />
+               ))}
             </div>
          </div>
          <div className={sliderBlock}>
             <div className={styles.titleOfBlock}>Salary (min.)</div>
-            <Slider max={maxSalary} />
+            <Slider
+               max={maxSalary}
+               sliderVal={filterSettings.salary}
+               sliderOnChange={handleSliderChange}
+            />
          </div>
       </div>
    );
