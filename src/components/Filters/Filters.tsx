@@ -10,7 +10,8 @@ import Button from '../UI/Button';
 import useFindJobOffers from '../../data/job-offer/queries/useFindJobOffers';
 import { useState } from 'react';
 
-interface FiltersProps {}
+interface FiltersProps {
+}
 
 const Filters = (props: FiltersProps) => {
 

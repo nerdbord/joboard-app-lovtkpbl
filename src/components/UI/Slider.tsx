@@ -2,12 +2,18 @@ import React, { useState } from 'react';
 import styles from './Slider.module.scss';
 import { useFilter, useFilterUpdate } from '../Filters/FilterContext';
 import { FilterTypes } from '../../enums';
+import useIsSmallScreen from '../../hooks/useSmallScreen';
+import classNames from 'classnames';
 
 interface SliderProps {
    max: number;
 }
 
 const Slider = (props: SliderProps) => {
+
+   const isSmallScreen = useIsSmallScreen(768);
+   const [isActive, setIsActive] = useState(false)   
+   const thumbFollowerStyle = classNames(styles.thumbFollower, isSmallScreen && isActive ? styles.thumbFollowerSmall : "")
 
    //getting actual value straight from context
    const sliderVal = useFilter().salary;
@@ -35,7 +41,7 @@ const Slider = (props: SliderProps) => {
    return (
       <div className={styles.sliderTop}>
          <div
-            className={styles.thumbFollower}
+            className={thumbFollowerStyle}
             style={{ left: `${fixedPercentVal}%` }}
          >
             {fixedDisplayVal}
@@ -44,6 +50,8 @@ const Slider = (props: SliderProps) => {
             type="range"
             className={styles.sliderMain}
             onChange={handleChange}
+            onTouchStart={() => {setIsActive(true)}}
+            onTouchEnd={() => setIsActive(false)}
             value={fixedSliderVal}
             min={0}
             max={props.max}
