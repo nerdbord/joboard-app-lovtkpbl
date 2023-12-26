@@ -17,10 +17,32 @@
    transform: translate(-50%, -50%);
    z-index: 30;
 
-   width: 1094px;
+   width: 100%;
+   max-width: 1094px;
 
    margin: 0 auto;
    padding: 65px 74px 48px 60px;
+   border-radius: var(--border-radius-default);
+
+   background-color: var(--color-white);
+   border: 1px solid var(--color-gray-light);
+}
+
+.modalSmall {
+   position: fixed;
+   top: 0;
+   left: 0;
+   transform: none;
+   z-index: 30;
+
+   width: 100%;
+   max-width: 1094px;
+
+   height: 100%;
+   overflow-y: auto;
+   
+   margin: 0 auto;
+   padding: 26px 30px 26px 30px;
    border-radius: var(--border-radius-default);
 
    background-color: var(--color-white);

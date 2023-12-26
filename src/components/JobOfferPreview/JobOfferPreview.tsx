@@ -9,6 +9,7 @@ import { formatTimeDifference } from '../../helpers/formatTimeDifference';
 import Modal from '../UI/Modal';
 import Button from '../UI/Button';
 import Loader from '../UI/Loader';
+import useIsSmallScreen from '../../hooks/useSmallScreen';
 
 interface JobOfferPreviewProps {
    onClose: () => void;
@@ -17,6 +18,7 @@ interface JobOfferPreviewProps {
 
 const JobOfferPreview = (props: JobOfferPreviewProps) => {
    const { data, error, isPending } = useFindJobOfferDetails(props.offerId);
+   const isSmallScreen = useIsSmallScreen(768);
 
    const salaryFromFormatted =
       data && data.salaryFrom.toLocaleString('en-US', { useGrouping: true }).replace(/,/g, ' ');
@@ -34,10 +36,31 @@ const JobOfferPreview = (props: JobOfferPreviewProps) => {
                   <img src={data.image} alt={data.title} />
                </div>
                <div className={styles.headerText}>
-                  <h4>{data.title}</h4>
+                  <h4>
+                     {data.title} | {data.companyName}
+                  </h4>
                   <span>{data.technologies.join('・')}</span>
                </div>
             </section>
+         );
+   };
+
+   const SmallHeaderSection = () => {
+      if (!data) {
+         return;
+      } else
+         return (
+            <>
+               <img className={styles.smallImage} src={data.image} alt={data.title} />
+               <section className={styles.headerSection}>
+                  <div className={styles.headerText}>
+                     <h4>
+                        {data.title} | {data.companyName}
+                     </h4>
+                     <span>{data.technologies.join('・')}</span>
+                  </div>
+               </section>
+            </>
          );
    };
 
@@ -132,20 +155,24 @@ const JobOfferPreview = (props: JobOfferPreviewProps) => {
             <Loader />
          ) : error ? (
             <span>Error: {error.message}</span>
+         ) : isSmallScreen ? (
+            <>
+               <SmallHeaderSection />
+               <InfoList />
+               <ButtonSection />
+               <DescriptionBox />
+            </>
          ) : (
-            data && (
-               <>
-                  {/* <Loader /> */}
-                  <HeaderSection />
-                  <section className={styles.detailsSection}>
-                     <DescriptionBox />
-                     <section className={styles.infoSection}>
-                        <ButtonSection />
-                        <InfoList />
-                     </section>
+            <>
+               <HeaderSection />
+               <section className={styles.detailsSection}>
+                  <DescriptionBox />
+                  <section className={styles.infoSection}>
+                     <ButtonSection />
+                     <InfoList />
                   </section>
-               </>
-            )
+               </section>
+            </>
          )}
       </Modal>
    );
