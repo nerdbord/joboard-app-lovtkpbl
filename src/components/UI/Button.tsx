@@ -14,7 +14,10 @@ const Button = (props: ButtonProps) => {
    const buttonStyle = classNames(
       props.className ? props.className : '',
       styles.buttonStyle,
-      props.type == ButtonType.Primary ? styles.buttonPrimary : styles.buttonText,
+      props.type === ButtonType.Primary && styles.buttonPrimary,
+      props.type === ButtonType.Text && styles.buttonText,
+      props.type === ButtonType.Filters && styles.buttonFilters,
+      props.type === ButtonType.FiltersActive && styles.buttonFiltersActive,
    );
 
    const handleClick = () => {

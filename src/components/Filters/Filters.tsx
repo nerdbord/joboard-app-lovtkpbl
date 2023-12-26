@@ -9,14 +9,18 @@ import Slider from '../UI/Slider';
 import Button from '../UI/Button';
 import useFindJobOffers from '../../data/job-offer/queries/useFindJobOffers';
 import { useState } from 'react';
+import useIsSmallScreen from '../../hooks/useSmallScreen';
 
-interface FiltersProps {}
+interface FiltersProps {
+}
 
 const Filters = (props: FiltersProps) => {
    const resetFilterSettings = useFilterReset();
    const filterUpdate = useFilterUpdate();
    const filterSettings = useFilter();
    const [maxSalary, setMaxSalary] = useState(0);
+
+   const isSmallScreen = useIsSmallScreen(768);
 
    const { data } = useFindJobOffers();
 
@@ -38,8 +42,12 @@ const Filters = (props: FiltersProps) => {
       FilterTypes.junior,
       FilterTypes.intern,
    ];
-   //hey Nerdy, location based checkbox filtering is in this file!
+
    const locationArray = [FilterTypes.remote, FilterTypes.partRemote, FilterTypes.onSite];
+
+   const topWrapStyle = classNames(styles.filtersTopWrap, isSmallScreen ? styles.filtersTopWrapSmall : "")
+
+   const blockGridStyle = classNames(styles.blockGrid, isSmallScreen ? styles.blockGridMobile : "")
 
    const topBlock = classNames(styles.filtersBlock, styles.topBlock);
 
@@ -55,7 +63,7 @@ const Filters = (props: FiltersProps) => {
    };
 
    return (
-      <div className={styles.filtersTopWrap}>
+      <div className={topWrapStyle}>
          <div className={topBlock}>
             <div className={styles.filtersTitle}>Filter offers</div>
             <Button type={ButtonType.Text} onClick={resetFilterSettings}>
@@ -64,7 +72,7 @@ const Filters = (props: FiltersProps) => {
          </div>
          <div className={styles.filtersBlock}>
             <div className={styles.titleOfBlock}>Job type</div>
-            <div className={styles.blockGrid}>
+            <div className={blockGridStyle}>
                {jobTypesArray.map((jobType, index) => (
                   <Checkbox
                      option={jobType}
@@ -77,7 +85,7 @@ const Filters = (props: FiltersProps) => {
          </div>
          <div className={styles.filtersBlock}>
             <div className={styles.titleOfBlock}>Seniority</div>
-            <div className={styles.blockGrid}>
+            <div className={blockGridStyle}>
                {seniorityArray.map((seniority, index) => (
                   <Checkbox
                      option={seniority}
@@ -90,7 +98,7 @@ const Filters = (props: FiltersProps) => {
          </div>
          <div className={styles.filtersBlock}>
             <div className={styles.titleOfBlock}>Location</div>
-            <div className={styles.blockGrid}>
+            <div className={blockGridStyle}>
                {locationArray.map((location, index) => (
                   <Checkbox
                      option={location}
