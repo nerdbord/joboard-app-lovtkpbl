@@ -13,9 +13,8 @@ const ModalOverlay = (props: PropsWithChildren) => {
    return <div className={styles.modal}>{props.children}</div>;
 };
 
-const portalElement = document.getElementById('overlays') as HTMLDivElement;
-
 const Modal = (props: { onClose: () => void; children: ReactNode }) => {
+   const portalElement = document.getElementById('overlays') as HTMLDivElement;
    return (
       <>
          {ReactDOM.createPortal(<Backdrop onClose={props.onClose} />, portalElement)}
