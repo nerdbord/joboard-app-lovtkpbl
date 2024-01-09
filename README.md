@@ -2,6 +2,7 @@
   JoBoard 🛹
 </h1>
 
+Demo: https://joboard-app-lovtkpbl.vercel.app/
 This project is a job board for tech people.
 
 ---
