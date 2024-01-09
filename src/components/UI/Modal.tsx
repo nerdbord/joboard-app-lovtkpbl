@@ -4,13 +4,15 @@ import styles from './Modal.module.scss';
 
 // components
 import CloseIcon from '../icons/CloseIcon';
+import useIsSmallScreen from '../../hooks/useSmallScreen';
 
 const Backdrop = (props: { onClose: () => void }) => {
    return <div className={styles.backdrop} onClick={props.onClose} />;
 };
 
 const ModalOverlay = (props: PropsWithChildren) => {
-   return <div className={styles.modal}>{props.children}</div>;
+   const isSmallScreen = useIsSmallScreen(768)
+   return <div className={isSmallScreen ? styles.modalSmall : styles.modal}>{props.children}</div>;
 };
 
 const portalElement = document.getElementById('overlays') as HTMLDivElement;
