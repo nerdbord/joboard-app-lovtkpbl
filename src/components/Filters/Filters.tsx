@@ -1,6 +1,6 @@
 import styles from './Filters.module.scss';
 import classNames from 'classnames';
-import { useFilter, useFilterReset, useFilterUpdate } from '../../providers/Filters/FilterContext';
+import { initialFilterSettings, useFilter, useFilterReset, useFilterUpdate } from '../../providers/Filters/FilterContext';
 import { ButtonType, FilterTypes } from '../../enums';
 
 // components

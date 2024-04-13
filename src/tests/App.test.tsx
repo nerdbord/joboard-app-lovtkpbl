@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import App from '../App';
-import { expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 describe('App', () => {
    it('renders headline', () => {
@@ -9,3 +9,5 @@ describe('App', () => {
       expect(headline).toBeInTheDocument();
    });
 });
+
+
