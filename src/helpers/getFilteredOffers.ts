@@ -1,15 +1,11 @@
-import { useState } from 'react';
+
 import { FilterSettings } from '../interfaces';
 import { JobData } from '../types';
 import { getFilterGroup } from './getFilterGroup';
 import { getFilterText } from './getFilterText';
-
-import { initialFilterSettings, useFilterReset } from '../providers/Filters/FilterContext';
-import { getGroupedFilters } from './getGroupedFilters';
 import { areAllBooleanFieldsFalse } from './areAllBoleanFieldsFalse';
 
 export function getFilteredOffers(offers: JobData[] | undefined, filterSettings: FilterSettings) {
-   const groupedFilters = getGroupedFilters(filterSettings);
    const filteredOffers = offers?.filter((offer) => {
       const nameRegex = new RegExp(filterSettings.nameString.trim(), 'i');
       const locationRegex = new RegExp(filterSettings.locationString.trim(), 'i');
@@ -25,17 +21,6 @@ export function getFilteredOffers(offers: JobData[] | undefined, filterSettings:
        *    and I'm kinda proud of this helper function anyway, because it was a nice puzzle to solve.
        */
 
-      if (filterSettings.salary! > offer.salaryTo) {
-         filterToggle = false;
-      }
-
-      if (!nameRegex.test(offer.title)) {
-         filterToggle = false;
-      }
-
-      if (!locationRegex.test(`${offer.city}, ${offer.country}`)) {
-         filterToggle = false;
-      }
 
       for (const filterType in filterSettings) {
          const filterTypeName = getFilterText(filterType);
@@ -47,8 +32,22 @@ export function getFilteredOffers(offers: JobData[] | undefined, filterSettings:
             break;
          }
       }
-
+      
       filterToggle = areAllBooleanFieldsFalse(filterSettings) ? true : filterToggle;
+
+      if (!nameRegex.test(offer.title)) {
+         filterToggle = false;
+      }
+
+      if (!locationRegex.test(`${offer.city}, ${offer.country}`)) {
+         filterToggle = false;
+      }
+
+
+
+      if (filterSettings.salary > offer.salaryTo) {
+         filterToggle = false;
+      }
 
       return filterToggle;
    });

@@ -12,7 +12,7 @@ const JobOffersList = (props: JobOffersListProps) => {
    return (
       <ul className={styles.jobList} role="list">
          {props.offers.map((offer) => (
-            <JobOffer key={offer._id} jobData={offer} />
+            <JobOffer key={offer._id} jobData={offer}/>
          ))}
       </ul>
    );

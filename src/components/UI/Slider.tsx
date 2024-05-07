@@ -55,6 +55,7 @@ const Slider = (props: SliderProps) => {
             value={fixedSliderVal}
             min={0}
             max={props.max}
+            data-testid={"slider"}
          />
       </div>
    );

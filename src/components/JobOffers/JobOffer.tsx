@@ -43,7 +43,7 @@ const JobOffer = (props: JobOfferProps) => {
 
          {!isSmallScreen && (
             <li className={styles.jobItem} onClick={showJobOfferPreviewHandler}>
-               <div className={styles.jobContent}>
+               <div className={styles.jobContent} data-testid={`jobOffer-${props.jobData._id}`}>
                   <div className={styles.imageContainer}>
                      <img src={props.jobData.image} alt={props.jobData.companyName} />
                   </div>
