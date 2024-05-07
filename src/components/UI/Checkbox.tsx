@@ -25,7 +25,7 @@ const Checkbox = (props: CheckboxProps) => {
 
    return (
       <div className={styles.checkboxTopWrap} onClick={() => {props.onChange(props.option)}}>
-         <input type="checkbox" hidden={true} onChange={() => {}} />
+         <input type="checkbox" hidden={true} onChange={() => {}}  data-testid={`checkbox-${props.option}`} />
          <div className={rectangleStyle}>{props.value && <Checkmark />}</div>
          <div className={textStyle}>{getFilterText(props.option)}</div>
       </div>
